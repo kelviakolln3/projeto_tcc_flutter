@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -30,7 +31,9 @@ class LoginPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text("Login", style: TextStyle(fontSize: 20, color: Colors.white)),
+                  Text(
+                    FlutterI18n.translate(context, 'login.title'),
+                    style: const TextStyle(fontSize: 20, color: Colors.white)),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: TextFormField(
@@ -38,19 +41,19 @@ class LoginPage extends StatelessWidget {
                       style: const TextStyle(fontSize: 15, color: Colors.white),
                       //controller: logingUIController.usuarioTextController,
                       keyboardType: TextInputType.number,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           fillColor: Colors.white,
-                          enabledBorder: OutlineInputBorder(
+                          enabledBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide(color: Colors.white, width: 1.2),
                           ),
-                          focusedBorder: OutlineInputBorder(
+                          focusedBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(90.0)),
                             borderSide: BorderSide(color: Colors.white, width: 1.2),
                           ),
-                          prefixIcon: Icon(Icons.person_2_outlined, color: Colors.white),
-                          labelText: 'Usuário',
-                          labelStyle: TextStyle(fontSize: 15, color: Colors.white)),
+                          prefixIcon: const Icon(Icons.person_2_outlined, color: Colors.white),
+                          labelText: FlutterI18n.translate(context, 'login.user'),
+                          labelStyle: const TextStyle(fontSize: 15, color: Colors.white)),
                     ),
                   ),
                   Container(
@@ -71,7 +74,7 @@ class LoginPage extends StatelessWidget {
                           suffixIcon: IconButton(
                               onPressed: () => {},
                               icon: const Icon(Icons.visibility, color: Colors.white)),
-                          labelText: 'Senha',
+                          labelText: FlutterI18n.translate(context, 'login.password'),
                           labelStyle: const TextStyle(fontSize: 15, color: Colors.white)),
                     ),
                   ),
@@ -84,8 +87,9 @@ class LoginPage extends StatelessWidget {
                         border: Border.all(color: Colors.white),
                         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                       ),
-                      child: const Center(
-                        child: Text("Entrar", style: TextStyle(fontSize: 15, color: Colors.white)),
+                      child: Center(
+                        child: Text(FlutterI18n.translate(context, 'login.submit'), 
+                          style: const TextStyle(fontSize: 15, color: Colors.white)),
                       ),
                     ),
                   ),
