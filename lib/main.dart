@@ -3,7 +3,7 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 
-import 'ui/login/login.dart';
+import 'factories/pages/pages.dart';
 
 void main() {
   runApp(const ProjetoTCC());
@@ -13,12 +13,15 @@ class ProjetoTCC extends StatelessWidget {
   const ProjetoTCC({super.key});
   @override
   Widget build(BuildContext context) {
+    final routeObserver = Get.put<RouteObserver>(RouteObserver<PageRoute>());
     return GetMaterialApp(
       title: 'Mini ERP',
       debugShowCheckedModeBanner: false,
       initialRoute: '/login',
+      navigatorObservers: [routeObserver],
       getPages: [
-        GetPage(name: '/login', page: () => const LoginPage()),
+        GetPage(name: '/login', page: makeLoginPage),
+        GetPage(name: '/home', page: makeHomePage, transition: Transition.fadeIn),
       ],
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         FlutterI18nDelegate(

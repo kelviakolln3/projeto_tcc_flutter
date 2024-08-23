@@ -1,7 +1,7 @@
 {
     "login": {
         "title": "Login",
-        "user": "Usuário",
+        "email": "E-mail",
         "password": "Senha",
         "submit": "Entrar"
     }
