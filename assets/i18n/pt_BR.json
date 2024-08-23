@@ -4,5 +4,12 @@
         "email": "E-mail",
         "password": "Senha",
         "submit": "Entrar"
+    },
+    "home":{
+        "title": "Mini ERP",
+        "custumers": "Clientes",
+        "protucts": "Produtos",
+        "orders": "Pedidos",
+        "suppliers": "Fornecedores"
     }
 }
