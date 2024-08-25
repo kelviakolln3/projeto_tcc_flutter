@@ -1,15 +1,23 @@
 {
+    "reload": "Recarregar",
     "login": {
         "title": "Login",
         "email": "E-mail",
         "password": "Senha",
-        "submit": "Entrar"
+        "submit": "entrar"
     },
     "home":{
         "title": "Mini ERP",
-        "custumers": "Clientes",
-        "protucts": "Produtos",
-        "orders": "Pedidos",
-        "suppliers": "Fornecedores"
+        "custumers": "clientes",
+        "protucts": "produtos",
+        "orders": "pedidos",
+        "suppliers": "fornecedores"
+    },
+    "custumers":{
+        "title": "Clientes",
+        "name": "nome: ",
+        "contact": "contato: ",
+        "email": "e-mail: ",
+        "no_custumers": "não hã clientes"
     }
 }

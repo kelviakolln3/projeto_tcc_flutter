@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:get/get.dart';
 
 class MenuCard extends StatelessWidget {
   final IconData icon;
   final String translate;
-  const MenuCard({required this.icon, required this.translate, super.key});
+  final String route;
+  const MenuCard({required this.icon, required this.translate, required this.route, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +30,9 @@ class MenuCard extends StatelessWidget {
               Expanded(
                 child: Container(
                   alignment: Alignment.centerRight,
-                  child: const Icon(Icons.arrow_right_outlined,
-                      color: Colors.teal, size: 32),
+                  child: IconButton(
+                    onPressed: () => Get.toNamed(route),
+                    icon: const Icon(Icons.arrow_right_outlined, color: Colors.teal, size: 32)),
                 ),
               )
             ],

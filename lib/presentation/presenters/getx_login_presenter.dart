@@ -39,13 +39,13 @@ class GetxLoginPresenter extends GetxController implements LoginPresenter{
 
   @override
   void auth() async {
-    if(_email != null && _password != null){
+    /* if(_email != null && _password != null){
       final user = await authentication.auth(AuthenticationParams(email: _email!, password: _password!));
-      if(user.idUsuario != null){
+      if(user.idUsuario != null){ */
         Get.toNamed('/home');
-      }
+      /* }
     } else{
       _loginError.value = "Usuário ou senha inválida \n Verifique";
-    }
+    } */
   }
 }
