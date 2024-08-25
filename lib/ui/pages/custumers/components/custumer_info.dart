@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-class CustumerListInfo extends StatelessWidget {
+class CustumerInfo extends StatelessWidget {
   final String translate;
   final String info;
-  const CustumerListInfo({required this.translate, required this.info, super.key});
+  const CustumerInfo({required this.translate, required this.info, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -16,6 +16,10 @@
     "custumers":{
         "title": "Clientes",
         "name": "nome: ",
+        "cpf": "CPF: ",
+        "rg": "RG: ",
+        "address": "endereço: ",
+        "birthday": "data nascimento: ",
         "contact": "contato: ",
         "email": "e-mail: ",
         "no_custumers": "não hã clientes"

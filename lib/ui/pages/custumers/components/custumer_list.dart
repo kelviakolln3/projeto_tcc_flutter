@@ -33,15 +33,20 @@ class CustumerList extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustumerListInfo(translate: 'name', info: viewModels[index].nome),
-                    CustumerListInfo(translate: 'contact', info: viewModels[index].contato),
-                    CustumerListInfo(translate: 'email', info: viewModels[index].email),
+                    CustumerInfo(translate: 'name', info: viewModels[index].nome),
+                    CustumerInfo(translate: 'contact', info: viewModels[index].contato),
+                    CustumerInfo(translate: 'email', info: viewModels[index].email),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        const IconButton(
-                          onPressed: null,
-                          icon: Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
+                        IconButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context, 
+                              builder: (context) => CustumerInfoDialog(viewModels[index]),
+                            );
+                          },
+                          icon: const Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
                         ),
                         const IconButton(
                           onPressed: null,
