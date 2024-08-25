@@ -6,14 +6,14 @@
         "password": "Senha",
         "submit": "entrar"
     },
-    "home":{
+    "home": {
         "title": "Mini ERP",
         "custumers": "clientes",
-        "protucts": "produtos",
+        "products": "produtos",
         "orders": "pedidos",
         "suppliers": "fornecedores"
     },
-    "custumers":{
+    "custumers": {
         "title": "Clientes",
         "name": "nome: ",
         "cpf": "CPF: ",
@@ -34,5 +34,15 @@
         "birthday": "data nascimento",
         "contact": "contato",
         "email": "e-mail"
+    },
+    "products": {
+        "title": "Produtos",
+        "name":"nome: ",
+        "bar-code": "codigo de barras: ",
+        "stock": "estoque: ",
+        "group": "grupo: ",
+        "mark": "marca: ",
+        "sale-value": "valor de venda: ",
+        "no_products": "não hã produtos"
     }
 }

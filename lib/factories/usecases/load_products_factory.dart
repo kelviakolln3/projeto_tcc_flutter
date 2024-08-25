@@ -2,7 +2,7 @@ import '../../data/data.dart';
 import '../../domain/domain.dart';
 import '../factories.dart';
 
-DeleteCustumer makeDeleteCustumer() => RemoteDeleteCustumer(
+LoadProducts makeLoadProducts() => RemoteLoadProducts(
   httpClient: makeHttpAdapter(),
-  url: makeApiUrl('cliente')
+  url: makeApiUrl('produto')
 );

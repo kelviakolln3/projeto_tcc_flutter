@@ -1,0 +1,24 @@
+import '../../../domain/domain.dart';
+import '../../http/http.dart';
+import '../../models/models.dart';
+
+class RemoteLoadProducts implements LoadProducts {
+  final HttpClient httpClient;
+  final String url;
+
+  RemoteLoadProducts({
+    required this.httpClient,
+    required this.url
+  });
+
+  @override
+  Future<List<ProductsEntity>> load() async {
+    try {
+      final httpResponse = await httpClient.request(url: url, method: 'get');
+      return httpResponse.map<ProductsEntity>((json) => RemoteProductsModel.fromJson(json).toEntity()).toList();
+    } on HttpError {
+      DomainError.unexpected;
+    }
+    return [];
+  }
+}

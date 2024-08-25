@@ -20,8 +20,8 @@ class HomePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           MenuCard(icon: Icons.person_2_outlined, translate: 'custumers', route: '/custumers',),
-          /* MenuCard(icon: Icons.shopping_bag_outlined, translate: 'protucts'),
-          MenuCard(icon: Icons.shopping_cart_outlined, translate: 'orders'),
+          MenuCard(icon: Icons.shopping_bag_outlined, translate: 'products', route: '/products',),
+          /* MenuCard(icon: Icons.shopping_cart_outlined, translate: 'orders'),
           MenuCard(icon: Icons.store_outlined, translate: 'suppliers'), */
         ],
       ),
