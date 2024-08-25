@@ -23,6 +23,7 @@ class ProjetoTCC extends StatelessWidget {
         GetPage(name: '/login', page: makeLoginPage),
         GetPage(name: '/home', page: makeHomePage, transition: Transition.fadeIn),
         GetPage(name: '/custumers', page: makeCustumersPage, transition: Transition.fadeIn),
+        GetPage(name: '/custumers/create', page: makeCustumerCreatePage, transition: Transition.fadeIn),
       ],
       localizationsDelegates: <LocalizationsDelegate<dynamic>>[
         FlutterI18nDelegate(

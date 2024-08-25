@@ -23,5 +23,16 @@
         "contact": "contato: ",
         "email": "e-mail: ",
         "no_custumers": "não hã clientes"
+    },
+    "create-custumer": {
+        "title": "Cadastro Cliente",
+        "code": "código",
+        "name": "nome",
+        "cpf": "CPF",
+        "rg": "RG",
+        "address": "endereço",
+        "birthday": "data nascimento",
+        "contact": "contato",
+        "email": "e-mail"
     }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import '../../components/components.dart';
 import '../../mixins/mixins.dart';
@@ -48,6 +49,12 @@ class _CustumersPageState extends State<CustumersPage> with LoadingManager {
             }
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Get.toNamed('/custumers/create'),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.add, color: Colors.white, size: 25),
       ),
     );
   }
