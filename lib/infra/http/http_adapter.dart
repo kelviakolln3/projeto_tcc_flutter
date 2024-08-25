@@ -24,6 +24,8 @@ class HttpAdapter implements HttpClient {
         futureResponse = client.get(Uri.parse(url), headers: defaultHeaders);
       } else if (method == 'put') {
         futureResponse = client.put(Uri.parse(url), headers: defaultHeaders, body: jsonBody);
+      } else if (method == 'delete') {
+        futureResponse = client.delete(Uri.parse(url), headers: defaultHeaders);
       }
       if (futureResponse != null) {
         response = await futureResponse.timeout(const Duration(seconds: 10));

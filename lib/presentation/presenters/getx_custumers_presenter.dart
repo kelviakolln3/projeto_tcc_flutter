@@ -5,12 +5,13 @@ import '../mixins/mixins.dart';
 
 class GetxCustumersPresenter extends GetxController with LoadingManager, NavigationManager implements CustumersPresenter {
   final LoadCustumers loadCustumers;
+  final DeleteCustumer deleteCustumer;
   final _custumers = Rx<List<CustumerViewModel>>([]);
 
   @override
   Stream<List<CustumerViewModel>> get custumersStream => _custumers.stream;
 
-  GetxCustumersPresenter({required this.loadCustumers});
+  GetxCustumersPresenter({required this.loadCustumers, required this.deleteCustumer});
 
   @override
   Future<void> loadData() async {
@@ -28,6 +29,23 @@ class GetxCustumersPresenter extends GetxController with LoadingManager, Navigat
               contato: custumer.contato,
               email: custumer.email))
           .toList();
+    } on DomainError {
+      _custumers.subject.addError('Erro inesperado \n tente novamente');
+    }finally {
+      isLoading = false;
+    }
+  }
+
+  @override
+  Future<void> delete(int id) async {
+    try {
+      isLoading = true;
+      List<CustumerViewModel> list = _custumers.value.toList();
+      final delete = await deleteCustumer.delete(id);
+      if(delete) {
+        list.removeWhere((c) => c.idCliente == id);
+        _custumers.value = list;
+      }
     } on DomainError {
       _custumers.subject.addError('Erro inesperado \n tente novamente');
     }finally {

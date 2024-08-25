@@ -12,7 +12,8 @@ class CustumerList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (viewModels.isEmpty) {
       return Center(
-        child: Text(FlutterI18n.translate(context, 'custumers.no_custumers'), style: const TextStyle(fontSize: 25)),
+        child: Text(FlutterI18n.translate(context, 'custumers.no_custumers'),
+            style: const TextStyle(fontSize: 25)),
       );
     } else {
       return ListView.builder(
@@ -35,12 +36,21 @@ class CustumerList extends StatelessWidget {
                     CustumerListInfo(translate: 'name', info: viewModels[index].nome),
                     CustumerListInfo(translate: 'contact', info: viewModels[index].contato),
                     CustumerListInfo(translate: 'email', info: viewModels[index].email),
-                    const Row(
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        IconButton(onPressed: null, icon: Icon(Icons.remove_red_eye_sharp, color: Colors.blue)),
-                        IconButton(onPressed: null, icon: Icon(Icons.edit_outlined, color: Colors.orange)),
-                        IconButton(onPressed: null, icon: Icon(Icons.delete_outline_rounded, color: Colors.red))
+                        const IconButton(
+                          onPressed: null,
+                          icon: Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
+                        ),
+                        const IconButton(
+                          onPressed: null,
+                          icon: Icon(Icons.edit_outlined, color: Colors.orange),
+                        ),
+                        IconButton(
+                          onPressed: () => presenter.delete(viewModels[index].idCliente!),
+                          icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
+                        )
                       ],
                     )
                   ],

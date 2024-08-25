@@ -4,4 +4,5 @@ import '../../factories.dart';
 
 CustumersPresenter makeGetxCustumersPresenter() => GetxCustumersPresenter(
   loadCustumers: makeLoadCustumers(),
+  deleteCustumer: makeDeleteCustumer()
 );
