@@ -3,3 +3,4 @@ export './home/home.dart';
 export './custumers/custumers.dart';
 export './products/products.dart';
 export './create_custumer/create_custumer.dart';
+export './edit_custumer/edit_custumer.dart';

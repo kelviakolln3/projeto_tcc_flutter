@@ -25,10 +25,19 @@
         "no_custumers": "não hã clientes"
     },
     "create-custumer": {
-        "title": "Cadastro Cliente",
+        "title": "Cadastro do Cliente",
         "code": "código",
         "name": "nome",
         "cpf": "CPF",
+        "rg": "RG",
+        "address": "endereço",
+        "birthday": "data nascimento",
+        "contact": "contato",
+        "email": "e-mail"
+    },
+    "edit-custumer": {
+        "title": "Edição do Cliente",
+        "name": "nome",
         "rg": "RG",
         "address": "endereço",
         "birthday": "data nascimento",
