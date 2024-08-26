@@ -21,6 +21,7 @@ class GetxCustumersPresenter extends GetxController with LoadingManager, Navigat
       _custumers.value = custumers
           .map((custumer) => CustumerViewModel(
               idCliente: custumer.idCliente,
+              codigo: custumer.codigo,
               nome: custumer.nome,
               cpf: custumer.cpf,
               rg: custumer.rg,

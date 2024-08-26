@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:get/get.dart';
 import '../custumers.dart';
 import 'components.dart';
 
@@ -48,9 +49,9 @@ class CustumerList extends StatelessWidget {
                           },
                           icon: const Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
                         ),
-                        const IconButton(
-                          onPressed: null,
-                          icon: Icon(Icons.edit_outlined, color: Colors.orange),
+                        IconButton(
+                          onPressed: () => Get.toNamed('/custumers/edit/${viewModels[index].idCliente!}'),
+                          icon: const Icon(Icons.edit_outlined, color: Colors.orange),
                         ),
                         IconButton(
                           onPressed: () => presenter.delete(viewModels[index].idCliente!),

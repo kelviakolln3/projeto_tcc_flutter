@@ -1,25 +1,28 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+
 import '../../domain/domain.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
-import 'package:cpf_cnpj_validator/cpf_validator.dart';
 
-class GetxCustumerCreatePresenter extends GetxController with LoadingManager implements CustumerCreatePresenter {
-  final CreateCustumer createCustumer;
+class GetxCustumerEditPresenter extends GetxController with LoadingManager implements CustumerEditPresenter {
+  final FindCustumer findCustumer;
+  final EditCustumer editCustumer;
+  final String idCliente;
 
-  GetxCustumerCreatePresenter({required this.createCustumer});
+  GetxCustumerEditPresenter({required this.findCustumer, required this.editCustumer, required this.idCliente});
 
-  final _createError = Rx<String?>(null);
-  final _codeError = Rx<String?>(null);
+  final _custumer = Rx<CustumerViewModel?>(null);
+  final _editError = Rx<String?>(null);
   final _nameError = Rx<String?>(null);
-  final _cpfError = Rx<String?>(null);
   final _rgError = Rx<String?>(null);
   final _addressError = Rx<String?>(null);
   final _birthdayError = Rx<String?>(null);
   final _contactError = Rx<String?>(null);
   final _emailError = Rx<String?>(null);
 
-  String? _code;
+  int? _idCliente;
+  int? _code;
   String? _name;
   String? _cpf;
   String? _rg;
@@ -29,13 +32,11 @@ class GetxCustumerCreatePresenter extends GetxController with LoadingManager imp
   String? _email;
 
   @override
-  Stream<String?> get createErrorStream => _createError.stream;
+  Stream<CustumerViewModel?> get custumerStream => _custumer.stream;
   @override
-  Stream<String?> get codeErrorStream => _codeError.stream;
+  Stream<String?> get editErrorStream => _editError.stream;
   @override
   Stream<String?> get nameErrorStream => _nameError.stream;
-  @override
-  Stream<String?> get cpfErrorStream => _cpfError.stream;
   @override
   Stream<String?> get rgErrorStream => _rgError.stream;
   @override
@@ -46,16 +47,17 @@ class GetxCustumerCreatePresenter extends GetxController with LoadingManager imp
   Stream<String?> get contactErrorStream => _contactError.stream;
   @override
   Stream<String?> get emailErrorStream => _emailError.stream;
-
+  
   @override
-  Future<void> create() async {
+  Future<void> edit() async{
     try {
-      _createError.value = null;
-      if(_code != null || _name != null || _cpf != null || _rg != null || _address != null || _birthday != null || _contact != null || _email != null) {
+      _editError.value = null;
+      if(_name != null || _rg != null || _address != null || _birthday != null || _contact != null || _email != null){
         isLoading = true;
         var birthdaySplit = _birthday!.split('/'); 
-        final custumer = await createCustumer.create(CreateCustumerParams(
-          codigo: int.parse(_code!),
+        final custumer = await editCustumer.edit(EditCustumerParams(
+          idCliente: _idCliente!,
+          codigo: _code!,
           nome: _name!,
           cpf: _cpf!,
           rg: _rg!,
@@ -65,23 +67,49 @@ class GetxCustumerCreatePresenter extends GetxController with LoadingManager imp
           email: _email!
         ));
         if(custumer!.idCliente != null){
-          Get.toNamed('/custumers');
+          isLoading = false;
+          Get.back();
         }
-      } else {
-        _createError.value = 'Preencha todos os campos';
       }
     } on DomainError {
-      _createError.value = 'Erro inesperado \n tente novamente';
+      _editError.value = 'Erro inesperado \n tente novamente';
+    }
+  }
+  
+  @override
+  Future<void> find() async{
+    try {
+      _editError.value = null;
+      _custumer.value = null;
+      isLoading = true;
+      final custumer = await findCustumer.find(int.parse(idCliente));
+      if(custumer != null){
+        _custumer.value = CustumerViewModel(
+          idCliente: custumer.idCliente,
+          codigo: custumer.codigo,
+          nome: custumer.nome, 
+          cpf: custumer.cpf, 
+          rg: custumer.rg, 
+          endereco: custumer.endereco, 
+          dataNasc: custumer.dataNasc, 
+          contato: custumer.contato, 
+          email: custumer.email
+        );
+        _idCliente = custumer.idCliente!;
+        _code = custumer.codigo;
+        _name = custumer.nome;
+        _cpf = custumer.cpf;
+        _rg = custumer.rg;
+        _address = custumer.endereco;
+        _birthday = DateFormat('dd/MM/yyyy').format(DateTime.parse(custumer.dataNasc));
+        _contact = custumer.contato;
+        _email = custumer.email;
+      }
+    }on DomainError {
+      _editError.value = 'Não foi possível buscar os dados do cliente \n tente novamente';
     }finally {
       isLoading = false;
     }
-  }
-
-  @override
-  void validateCode(String? code) {
-    _codeError.value = null;
-    _code = code;
-    if(_code! == '0') _nameError.value = "Informe um código valido";
   }
 
   @override
@@ -89,13 +117,6 @@ class GetxCustumerCreatePresenter extends GetxController with LoadingManager imp
     _nameError.value = null;
     _name = name;
     if(!_name!.contains(' ')) _nameError.value = "Informe o nome completo";
-  }
-
-  @override
-  void valideteCPF(String? cpf) {
-    _cpfError.value = null;
-    _cpf = cpf;
-    if(!CPFValidator.isValid(_cpf)) _cpfError.value = "Informe um CPF valido";
   }
 
   @override

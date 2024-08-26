@@ -1,7 +1,12 @@
 import 'package:equatable/equatable.dart';
+import '../entities/entities.dart';
 
-class CustumerEntity extends Equatable {
-  final int? idCliente;
+abstract class EditCustumer {
+  Future<CustumerEntity?> edit(EditCustumerParams params);
+}
+
+class EditCustumerParams extends Equatable {
+  final int idCliente;
   final int codigo;
   final String nome;
   final String cpf;
@@ -12,10 +17,10 @@ class CustumerEntity extends Equatable {
   final String email;
 
   @override
-  List get props => [idCliente, nome, cpf, rg, endereco, dataNasc, contato, email];
+  List get props => [idCliente, codigo, nome, cpf, rg, endereco, dataNasc, contato, email];
 
-  const CustumerEntity({
-    this.idCliente,
+  const EditCustumerParams({
+    required this.idCliente,
     required this.codigo,
     required this.nome,
     required this.cpf,
@@ -23,6 +28,6 @@ class CustumerEntity extends Equatable {
     required this.endereco,
     required this.dataNasc,
     required this.contato,
-    required this.email
+    required this.email,
   });
 }

@@ -3,6 +3,7 @@ import '../http/http.dart';
 
 class RemoteCustumersModel {
   final int idCliente;
+  final int codigo;
   final String nome;
   final String cpf;
   final String rg;
@@ -13,6 +14,7 @@ class RemoteCustumersModel {
 
   RemoteCustumersModel({
     required this.idCliente,
+    required this.codigo,
     required this.nome,
     required this.cpf,
     required this.rg,
@@ -23,11 +25,12 @@ class RemoteCustumersModel {
   });
 
   factory RemoteCustumersModel.fromJson(Map json) {
-    if (!json.keys.toSet().containsAll(['idCliente', 'nome', 'cpf', 'rg', 'endereco', 'dataNasc', 'contato', 'email'])) {
+    if (!json.keys.toSet().containsAll(['idCliente', 'codigo', 'nome', 'cpf', 'rg', 'endereco', 'dataNasc', 'contato', 'email'])) {
       throw HttpError.invalidData;
     }
     return RemoteCustumersModel(
       idCliente: json['idCliente'],
+      codigo: json['codigo'],
       nome: json['nome'],
       cpf: json['cpf'],
       rg: json["rg"],
@@ -40,6 +43,7 @@ class RemoteCustumersModel {
 
   CustumerEntity toEntity() => CustumerEntity(
     idCliente: idCliente,
+    codigo: codigo,
     nome: nome,
     cpf: cpf,
     rg: rg,

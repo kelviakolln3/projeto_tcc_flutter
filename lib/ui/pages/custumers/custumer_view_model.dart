@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class CustumerViewModel extends Equatable {
   final int? idCliente;
+  final int codigo;
   final String nome;
   final String cpf;
   final String rg;
@@ -11,10 +12,11 @@ class CustumerViewModel extends Equatable {
   final String email;
 
   @override
-  List get props => [idCliente, nome, cpf, rg, endereco, dataNasc, contato, email];
+  List get props => [idCliente, codigo, nome, cpf, rg, endereco, dataNasc, contato, email];
 
   const CustumerViewModel({
     this.idCliente,
+    required this.codigo,
     required this.nome,
     required this.cpf,
     required this.rg,
