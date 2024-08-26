@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'components/components.dart';
-import 'custumers.dart';
+import 'create_custumer.dart';
 
 class CustumerCreatePage extends StatelessWidget {
   final CustumerCreatePresenter presenter;

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../custumers.dart';
+import '../create_custumer.dart';
 
-class RgInput extends StatelessWidget {
+class NameInput extends StatelessWidget {
   final CustumerCreatePresenter presenter;
-  const RgInput(this.presenter, {super.key});
+  const NameInput(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.rgErrorStream,
+        stream: presenter.nameErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
-            keyboardType: TextInputType.number,
-            onChanged: presenter.valideteRG,
+            keyboardType: TextInputType.text,
+            onChanged: presenter.valideteName,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -38,7 +38,7 @@ class RgInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.rg'),
+              labelText: FlutterI18n.translate(context, 'create-custumer.name'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

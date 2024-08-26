@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import '../create_custumer.dart';
 
-import '../custumers.dart';
-
-class AddressInput extends StatelessWidget {
+class RgInput extends StatelessWidget {
   final CustumerCreatePresenter presenter;
-  const AddressInput(this.presenter, {super.key});
+  const RgInput(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.addressErrorStream,
+        stream: presenter.rgErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
-            keyboardType: TextInputType.text,
-            onChanged: presenter.valideteAddress,
+            keyboardType: TextInputType.number,
+            onChanged: presenter.valideteRG,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -38,7 +37,7 @@ class AddressInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.address'),
+              labelText: FlutterI18n.translate(context, 'create-custumer.rg'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );
