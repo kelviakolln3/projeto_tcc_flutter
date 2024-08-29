@@ -6,3 +6,4 @@ export './edit_custumer_factory.dart';
 export './find_custumer_factory.dart';
 export './load_products_factory.dart';
 export './delete_product_factory.dart';
+export './create_product_factory.dart';

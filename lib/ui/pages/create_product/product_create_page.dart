@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import 'create_custumer.dart';
+import 'create_product.dart';
 
-class CustumerCreatePage extends StatelessWidget {
-  final CustumerCreatePresenter presenter;
-  const CustumerCreatePage(this.presenter, {super.key});
+class ProductCreatePage extends StatelessWidget {
+  final ProductCreatePresenter presenter;
+  const ProductCreatePage(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class CustumerCreatePage extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.teal,
         title: Text(
-          FlutterI18n.translate(context, 'create-custumer.title'), style: const TextStyle(color: Colors.white),
+          FlutterI18n.translate(context, 'create-product.title'), style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),
@@ -23,15 +23,13 @@ class CustumerCreatePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              CodeCustumerInput(presenter),
-              NameCustumerInput(presenter),
-              CpfInput(presenter),
-              RgInput(presenter),
-              AddressInput(presenter),
-              BirthdayInput(presenter),
-              ContactInput(presenter),
-              EmailInput(presenter),
-              ErrorCreate(presenter)
+              CodeProductInput(presenter),
+              NameProductInput(presenter),
+              BarCodeInput(presenter),
+              StockInput(presenter),
+              GroupInput(presenter),
+              MarkInput(presenter),
+              SaleValueInput(presenter)
             ],
           ),
         ),

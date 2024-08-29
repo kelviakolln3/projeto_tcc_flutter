@@ -51,7 +51,7 @@ class _CustumersPageState extends State<CustumersPage> with LoadingManager {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed('/custumers/create'),
+        onPressed: () => Get.toNamed('/custumer/create'),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         backgroundColor: Colors.teal,
         child: const Icon(Icons.add, color: Colors.white, size: 25),

@@ -1,7 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class ProductEntity extends Equatable {
-  final int? idProduto;
+import '../entities/entities.dart';
+
+abstract class CreateProduct {
+  Future<ProductEntity?> create(CreateProductParams params);
+}
+
+class CreateProductParams extends Equatable {
   final int codigo;
   final String nome;
   final String codigoBarras;
@@ -11,10 +16,9 @@ class ProductEntity extends Equatable {
   final double valorVenda;
 
   @override
-  List get props => [idProduto, codigo, nome, codigoBarras, estoque, grupo, marca, valorVenda];
+  List get props => [codigo, nome, codigoBarras, estoque, grupo, marca, valorVenda];
 
-  const ProductEntity({
-    this.idProduto,
+  const CreateProductParams({
     required this.codigo,
     required this.nome,
     required this.codigoBarras,

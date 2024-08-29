@@ -12,10 +12,10 @@ class RemoteLoadProducts implements LoadProducts {
   });
 
   @override
-  Future<List<ProductsEntity>> load() async {
+  Future<List<ProductEntity>> load() async {
     try {
       final httpResponse = await httpClient.request(url: url, method: 'get');
-      return httpResponse.map<ProductsEntity>((json) => RemoteProductsModel.fromJson(json).toEntity()).toList();
+      return httpResponse.map<ProductEntity>((json) => RemoteProductsModel.fromJson(json).toEntity()).toList();
     } on HttpError {
       DomainError.unexpected;
     }

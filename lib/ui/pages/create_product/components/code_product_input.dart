@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../create_custumer.dart';
+import '../create_product.dart';
 
-class CodeInput extends StatelessWidget {
-  final CustumerCreatePresenter presenter;
-  const CodeInput(this.presenter, {super.key});
+class CodeProductInput extends StatelessWidget {
+  final ProductCreatePresenter presenter;
+  const CodeProductInput(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return  Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
         stream: presenter.codeErrorStream,
@@ -38,7 +38,7 @@ class CodeInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.code'),
+              labelText: FlutterI18n.translate(context, 'create-product.code'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

@@ -38,7 +38,7 @@ class RemoteProductsModel {
     );
   }
 
-  ProductsEntity toEntity() => ProductsEntity(
+  ProductEntity toEntity() => ProductEntity(
     idProduto: idProduto,
     codigo: codigo,
     nome: nome,

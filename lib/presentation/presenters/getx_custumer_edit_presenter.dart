@@ -116,21 +116,21 @@ class GetxCustumerEditPresenter extends GetxController with LoadingManager imple
   void valideteName(String? name) {
     _nameError.value = null;
     _name = name;
-    if(!_name!.contains(' ')) _nameError.value = "Informe o nome completo";
+    if(_name == null) _nameError.value = "Informe o nome completo";
   }
 
   @override
   void valideteRG(String? rg) {
     _rgError.value = null;
     _rg = rg;
-    if(_rg!.contains(' ')) _rgError.value = "Informe um RG";
+    if(_rg == null) _rgError.value = "Informe um RG";
   }
 
   @override
   void valideteAddress(String? address) {
     _addressError.value = null;
     _address = address;
-    if(_address!.contains(' ')) _addressError.value = "Informe um endereço";
+    if(_address == null) _addressError.value = "Informe um endereço";
   }
 
   @override
@@ -151,7 +151,7 @@ class GetxCustumerEditPresenter extends GetxController with LoadingManager imple
   void valideteContact(String? contact) {
     _contactError.value = null;
     _contact = contact;
-    if(!_contact!.contains(' ')) _contactError.value = "Informe um contato";
+    if(_contact == null) _contactError.value = "Informe um contato";
   }
 
   @override

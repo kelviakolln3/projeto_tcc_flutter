@@ -3,7 +3,7 @@ import '../../domain/domain.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
 
-class GexProductsPresenter extends GetxController with LoadingManager, NavigationManager implements ProductsPresenter{
+class GextProductsPresenter extends GetxController with LoadingManager, NavigationManager implements ProductsPresenter{
   final LoadProducts loadProducts;
   final DeleteProduct deleteProduct;
 
@@ -12,7 +12,7 @@ class GexProductsPresenter extends GetxController with LoadingManager, Navigatio
   @override
   Stream<List<ProductsViewModel>> get productsStream => _products.stream;
 
-  GexProductsPresenter({required this.loadProducts, required this.deleteProduct});
+  GextProductsPresenter({required this.loadProducts, required this.deleteProduct});
 
   @override
   Future<void> loadData() async {

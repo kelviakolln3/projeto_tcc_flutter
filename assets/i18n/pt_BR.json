@@ -53,5 +53,15 @@
         "mark": "marca: ",
         "sale-value": "valor de venda: ",
         "no_products": "não hã produtos"
+    },
+    "create-product": {
+        "title":"Cadastro do Produto",
+        "code": "código",
+        "name": "nome",
+        "bar-code": "codigo de barras",
+        "stock": "estoque",
+        "group": "grupo",
+        "mark": "marca",
+        "sale-value": "valor de venda"
     }
 }

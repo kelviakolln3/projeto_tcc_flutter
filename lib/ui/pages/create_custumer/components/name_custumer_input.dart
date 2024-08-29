@@ -3,9 +3,9 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import '../create_custumer.dart';
 
-class NameInput extends StatelessWidget {
+class NameCustumerInput extends StatelessWidget {
   final CustumerCreatePresenter presenter;
-  const NameInput(this.presenter, {super.key});
+  const NameCustumerInput(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {

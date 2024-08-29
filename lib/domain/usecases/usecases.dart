@@ -6,3 +6,4 @@ export './edit_custumer.dart';
 export './find_custumer.dart';
 export './load_products.dart';
 export './delete_product.dart';
+export './create_product.dart';
