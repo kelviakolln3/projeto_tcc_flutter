@@ -6,3 +6,6 @@ export './edit_custumer/edit_custumer.dart';
 export './products/products.dart';
 export './create_product/create_product.dart';
 export './edit_product/edit_product.dart';
+export './suppliers/suppliers.dart';
+export './create_supplier/create_supplier.dart';
+export './edit_supplier/edit_supplier.dart';

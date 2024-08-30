@@ -9,3 +9,8 @@ export './delete_product.dart';
 export './create_product.dart';
 export './find_product.dart';
 export './edit_product.dart';
+export './load_suppliers.dart';
+export './delete_supplier.dart';
+export './create_supplier.dart';
+export './find_supplier.dart';
+export './edit_supplier.dart';

@@ -3,8 +3,6 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
 import '../../mixins/mixins.dart';
 import '../pages.dart';
-import 'components/components.dart';
-
 
 class ProductEditPage extends StatefulWidget {
   final ProductEditPresenter presenter;
