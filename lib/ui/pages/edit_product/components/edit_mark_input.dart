@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-import '../edit_custumer.dart';
+import '../edit_product.dart';
 
-class BirthdayInput extends StatelessWidget {
-  final CustumerEditPresenter presenter;
-  final String birthday;
-  const BirthdayInput(this.presenter, this.birthday, {super.key});
+class EditMarkInput extends StatelessWidget {
+  final ProductEditPresenter presenter;
+  final String mark;
+  const EditMarkInput(this.presenter, this.mark, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final maskBirthday = MaskTextInputFormatter(mask: "##/##/####", filter: {"#": RegExp(r'[0-9]')});
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.birthdayErrorStream,
+        stream: presenter.markErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
-            keyboardType: TextInputType.number,
-            onChanged: presenter.valideteBirthday,
-            inputFormatters: [maskBirthday],
-            initialValue: birthday,
+            keyboardType: TextInputType.text,
+            onChanged: presenter.valideteMark,
+            initialValue: mark,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -43,7 +40,7 @@ class BirthdayInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.birthday'),
+              labelText: FlutterI18n.translate(context, 'create-product.mark'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

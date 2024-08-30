@@ -14,13 +14,13 @@ class EditCustumerInputs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        NameInput(presenter, custumer.nome),
-        RgInput(presenter, custumer.rg),
-        AddressInput(presenter, custumer.endereco),
-        BirthdayInput(presenter, DateFormat('dd/MM/yyyy').format(DateTime.parse(custumer.dataNasc))),
-        ContactInput(presenter, custumer.contato),
-        EmailInput(presenter, custumer.email),
-        ErrorCreate(presenter)
+        EditNameInput(presenter, custumer.nome),
+        EditRgInput(presenter, custumer.rg),
+        EditAddressInput(presenter, custumer.endereco),
+        EditBirthdayInput(presenter, DateFormat('dd/MM/yyyy').format(DateTime.parse(custumer.dataNasc))),
+        EditContactInput(presenter, custumer.contato),
+        EditEmailInput(presenter, custumer.email),
+        ErrorEditCustumer(presenter)
       ],
     );
   }

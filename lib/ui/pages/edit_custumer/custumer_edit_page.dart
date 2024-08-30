@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:provider/provider.dart';
-import '../../ui.dart';
+import '../../mixins/mixins.dart';
+import '../pages.dart';
 import 'components/components.dart';
 
 class CustumerEditPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _CustumerEditPageState extends State<CustumerEditPage> with LoadingManager
               if (snapshot.hasData || snapshot.data != null) {
                 return ListenableProvider(
                   create: (_) => widget.presenter,
-                  child: EditCustumerInputs(snapshot.data!, widget.presenter)
+                  child: SingleChildScrollView(child: EditCustumerInputs(snapshot.data!, widget.presenter))
                 );
               }
               return const SizedBox(height: 0);

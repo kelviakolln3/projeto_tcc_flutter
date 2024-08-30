@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ProductsViewModel extends Equatable {
+class ProductViewModel extends Equatable {
   final int? idProduto;
   final int codigo;
   final String nome;
@@ -13,7 +13,7 @@ class ProductsViewModel extends Equatable {
   @override
   List get props => [idProduto, codigo, nome, codigoBarras, estoque, grupo, marca, valorVenda];
 
-  const ProductsViewModel({
+  const ProductViewModel({
     this.idProduto,
     required this.codigo,
     required this.nome,

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../edit_custumer.dart';
+import '../edit_product.dart';
 
-class AddressInput extends StatelessWidget {
-  final CustumerEditPresenter presenter;
-  final String address;
-  const AddressInput(this.presenter, this.address, {super.key});
+class EditSaleValueInput extends StatelessWidget {
+  final ProductEditPresenter presenter;
+  final String saleValue;
+  const EditSaleValueInput(this.presenter, this.saleValue, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.addressErrorStream,
+        stream: presenter.saleValueErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
             keyboardType: TextInputType.text,
-            onChanged: presenter.valideteAddress,
-            initialValue: address,
+            onChanged: presenter.valideteSaleValue,
+            initialValue: saleValue,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -40,7 +40,7 @@ class AddressInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'edit-custumer.address'),
+              labelText: FlutterI18n.translate(context, 'create-product.sale-value'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

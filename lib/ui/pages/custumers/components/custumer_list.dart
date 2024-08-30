@@ -50,7 +50,7 @@ class CustumerList extends StatelessWidget {
                           icon: const Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
                         ),
                         IconButton(
-                          onPressed: () => Get.toNamed('/custumers/edit/${viewModels[index].idCliente!}'),
+                          onPressed: () => Get.toNamed('/custumer/edit/${viewModels[index].idCliente!}'),
                           icon: const Icon(Icons.edit_outlined, color: Colors.orange),
                         ),
                         IconButton(

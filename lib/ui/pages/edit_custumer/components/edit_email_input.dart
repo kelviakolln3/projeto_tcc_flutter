@@ -1,29 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../edit_custumer.dart';
 
-class ContactInput extends StatelessWidget {
+class EditEmailInput extends StatelessWidget {
   final CustumerEditPresenter presenter;
-  final String contact;
-  const ContactInput(this.presenter, this.contact, {super.key});
+  final String email;
+  const EditEmailInput(this.presenter, this.email, {super.key});
 
   @override
   Widget build(BuildContext context) {
-    final maskContact = MaskTextInputFormatter(mask: "(##) #####-####", filter: {"#": RegExp(r'[0-9]')});
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.contactErrorStream,
+        stream: presenter.emailErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
-            keyboardType: TextInputType.number,
-            onChanged: presenter.valideteContact,
-            inputFormatters: [maskContact],
-            initialValue: contact,
+            keyboardType: TextInputType.emailAddress,
+            onChanged: presenter.valideteEmail,
+            initialValue: email,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -43,7 +40,7 @@ class ContactInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.contact'),
+              labelText: FlutterI18n.translate(context, 'create-custumer.email'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

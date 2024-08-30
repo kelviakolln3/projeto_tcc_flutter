@@ -63,5 +63,14 @@
         "group": "grupo",
         "mark": "marca",
         "sale-value": "valor de venda"
+    },
+    "edit-product": {
+        "title":"Edição do Produto",
+        "name": "nome",
+        "bar-code": "codigo de barras",
+        "stock": "estoque",
+        "group": "grupo",
+        "mark": "marca",
+        "sale-value": "valor de venda"
     }
 }

@@ -4,7 +4,7 @@ import 'products.dart';
 
 abstract class ProductsPresenter implements Listenable {
   Stream<bool> get isLoadingStream;
-  Stream<List<ProductsViewModel>> get productsStream;
+  Stream<List<ProductViewModel>> get productsStream;
   Future<void> loadData();
   Future<void> delete(int idProduto);
 }

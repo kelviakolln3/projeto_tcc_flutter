@@ -7,10 +7,10 @@ class GextProductsPresenter extends GetxController with LoadingManager, Navigati
   final LoadProducts loadProducts;
   final DeleteProduct deleteProduct;
 
-  final _products = Rx<List<ProductsViewModel>>([]);
+  final _products = Rx<List<ProductViewModel>>([]);
 
   @override
-  Stream<List<ProductsViewModel>> get productsStream => _products.stream;
+  Stream<List<ProductViewModel>> get productsStream => _products.stream;
 
   GextProductsPresenter({required this.loadProducts, required this.deleteProduct});
 
@@ -20,7 +20,7 @@ class GextProductsPresenter extends GetxController with LoadingManager, Navigati
       isLoading = true;
       final products = await loadProducts.load();
       _products.value = products
-          .map((product) => ProductsViewModel(
+          .map((product) => ProductViewModel(
               idProduto: product.idProduto,
               codigo: product.codigo,
               nome: product.nome,
@@ -41,7 +41,7 @@ class GextProductsPresenter extends GetxController with LoadingManager, Navigati
   Future<void> delete(int id) async {
     try {
       isLoading = true;
-      List<ProductsViewModel> list = _products.value.toList();
+      List<ProductViewModel> list = _products.value.toList();
       final delete = await deleteProduct.delete(id);
       if(delete) {
         list.removeWhere((c) => c.idProduto == id);

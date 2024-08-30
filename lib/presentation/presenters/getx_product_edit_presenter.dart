@@ -3,13 +3,15 @@ import '../../domain/domain.dart';
 import '../../ui/pages/pages.dart';
 import '../mixins/mixins.dart';
 
-class GetxProductCreatePresenter extends GetxController with LoadingManager implements ProductCreatePresenter {
-  final CreateProduct createProduct;
+class GetxProductEditPresenter extends GetxController with LoadingManager implements ProductEditPresenter{
+  final FindProduct findProduct;
+  final EditProduct editProduct;
+  final String idProduto;
 
-  GetxProductCreatePresenter({required this.createProduct});
+  GetxProductEditPresenter({required this.findProduct, required this.editProduct, required this.idProduto});
 
-  final _createError = Rx<String?>(null);
-  final _codeError = Rx<String?>(null);
+  final _product = Rx<ProductViewModel?>(null);
+  final _editError = Rx<String?>(null);
   final _nameError = Rx<String?>(null);
   final _barCodeError = Rx<String?>(null);
   final _stockError = Rx<String?>(null);
@@ -17,18 +19,10 @@ class GetxProductCreatePresenter extends GetxController with LoadingManager impl
   final _markError = Rx<String?>(null);
   final _saleValueError = Rx<String?>(null);
 
-  String? _code;
-  String? _name;
-  String? _barCode;
-  String? _stock;
-  String? _group;
-  String? _mark;
-  String? _saleValue;
-
   @override
-  Stream<String?> get createErrorStream => _createError.stream;
+  Stream<ProductViewModel?> get productStream => _product.stream;
   @override
-  Stream<String?> get codeErrorStream => _codeError.stream;
+  Stream<String?> get editErrorStream => _editError.stream;
   @override
   Stream<String?> get nameErrorStream => _nameError.stream;
   @override
@@ -42,14 +36,24 @@ class GetxProductCreatePresenter extends GetxController with LoadingManager impl
   @override
   Stream<String?> get saleValueErrorStream => _saleValueError.stream;
 
+  int? _idProduto;
+  int? _code;
+  String? _name;
+  String? _barCode;
+  String? _stock;
+  String? _group;
+  String? _mark;
+  String? _saleValue;
+  
   @override
-  Future<void> create() async {
-     try {
-      _createError.value = null;
-      if(_code != null || _name != null || _barCode != null || _stock != null || _group != null || _mark != null || _saleValue != null) {
+  Future<void> edit() async {
+    try {
+      _editError.value = null;
+      if(_name != null || _barCode != null || _stock != null || _group != null || _mark != null || _saleValue != null){
         isLoading = true;
-        final product = await createProduct.create(CreateProductParams(
-          codigo: int.parse(_code!),
+        final custumer = await editProduct.edit(EditProductParams(
+          idProduto: _idProduto!,
+          codigo: _code!,
           nome: _name!,
           codigoBarras: _barCode!,
           estoque: double.parse(_stock!),
@@ -57,24 +61,48 @@ class GetxProductCreatePresenter extends GetxController with LoadingManager impl
           marca: _mark!,
           valorVenda: double.parse(_saleValue!.replaceAll(',', '.'))
         ));
-        if(product!.idProduto != null){
-          Get.toNamed('/products');
+        if(custumer!.idProduto != null){
+          isLoading = false;
+          Get.back();
         }
-      } else {
-        _createError.value = 'Preencha todos os campos';
       }
     } on DomainError {
-      _createError.value = 'Erro inesperado \n tente novamente';
+      _editError.value = 'Erro inesperado \n tente novamente';
+    }
+  }
+  
+  @override
+  Future<void> find() async {
+    try {
+      _editError.value = null;
+      _product.value = null;
+      isLoading = true;
+      final product = await findProduct.find(int.parse(idProduto));
+      if(product != null){
+        _product.value = ProductViewModel(
+          idProduto: product.idProduto,
+          codigo: product.codigo,
+          nome: product.nome,
+          codigoBarras: product.codigoBarras,
+          estoque: product.estoque,
+          grupo: product.grupo,
+          marca: product.marca,
+          valorVenda: product.valorVenda
+        );
+        _idProduto = product.idProduto!;
+        _code = product.codigo;
+        _name = product.nome;
+        _barCode = product.codigoBarras;
+        _stock = product.estoque.toString();
+        _group = product.grupo;
+        _mark = product.marca;
+        _saleValue = product.valorVenda.toString();
+      }
+    }on DomainError {
+      _editError.value = 'Não foi possível buscar os dados do cliente \n tente novamente';
     }finally {
       isLoading = false;
     }
-  }
-
-  @override
-  void validateCode(String? code) {
-    _codeError.value = null;
-    _code = code;
-    if(_code! == '0') _codeError.value = "Informe um código valido";
   }
 
   @override

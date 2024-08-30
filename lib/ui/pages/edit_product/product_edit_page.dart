@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
-import '../../components/components.dart';
 import '../../mixins/mixins.dart';
+import '../pages.dart';
 import 'components/components.dart';
-import 'products.dart';
 
-class ProductsPage extends StatefulWidget {
-  final ProductsPresenter presenter;
 
-  const ProductsPage(this.presenter, {super.key});
+class ProductEditPage extends StatefulWidget {
+  final ProductEditPresenter presenter;
+  const ProductEditPage(this.presenter, {super.key});
 
   @override
-  State<ProductsPage> createState() => _ProductsPageState();
+  State<ProductEditPage> createState() => _ProductEditPageState();
 }
 
-class _ProductsPageState extends State<ProductsPage> with LoadingManager {
+class _ProductEditPageState extends State<ProductEditPage> with LoadingManager {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,37 +22,34 @@ class _ProductsPageState extends State<ProductsPage> with LoadingManager {
         iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.teal,
         title: Text(
-          FlutterI18n.translate(context, 'products.title'), style: const TextStyle(color: Colors.white),
+          FlutterI18n.translate(context, 'edit-product.title'), style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
       ),
       body: Builder(
         builder: (context) {
           handleLoading(context, widget.presenter.isLoadingStream);
-          widget.presenter.loadData();
+          widget.presenter.find();
 
-          return StreamBuilder<List<ProductViewModel>>(
-            stream: widget.presenter.productsStream,
+          return StreamBuilder<ProductViewModel?>(
+            stream: widget.presenter.productStream,
             builder: (context, snapshot) {
-              if (snapshot.hasError) {
-                return ReloadScreen(error: '${snapshot.error}', reload: widget.presenter.loadData);
-              }
-              if (snapshot.hasData) {
+              if (snapshot.hasData || snapshot.data != null) {
                 return ListenableProvider(
                   create: (_) => widget.presenter,
-                  child: ProductsList(snapshot.data!, widget.presenter)
+                  child: SingleChildScrollView(child: EditProductInputs(snapshot.data!, widget.presenter))
                 );
               }
               return const SizedBox(height: 0);
-            }
+            },
           );
-        },
+        },  
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Get.toNamed('/product/create'),
+        onPressed: () => widget.presenter.edit(),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         backgroundColor: Colors.teal,
-        child: const Icon(Icons.add, color: Colors.white, size: 25),
+        child: const Icon(Icons.check, color: Colors.white, size: 25),
       ),
     );
   }

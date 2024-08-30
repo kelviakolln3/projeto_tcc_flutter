@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../edit_custumer.dart';
+import '../edit_product.dart';
 
-class ErrorCreate extends StatelessWidget {
-  final CustumerEditPresenter presenter;
-  const ErrorCreate(this.presenter, {super.key});
+class ErrorEditProduct extends StatelessWidget {
+  final ProductEditPresenter presenter;
+  const ErrorEditProduct(this.presenter, {super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,26 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
 
-import '../edit_custumer.dart';
+import '../edit_product.dart';
 
-class NameInput extends StatelessWidget {
-  final CustumerEditPresenter presenter;
-  final String name;
-  const NameInput(this.presenter, this.name, {super.key});
+class EditGroupInput extends StatelessWidget {
+  final ProductEditPresenter presenter;
+  final String group;
+  const EditGroupInput(this.presenter, this.group, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.nameErrorStream,
+        stream: presenter.groupErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
             keyboardType: TextInputType.text,
-            onChanged: presenter.valideteName,
-            initialValue: name,
+            onChanged: presenter.valideteGroup,
+            initialValue: group,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -40,7 +40,7 @@ class NameInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.name'),
+              labelText: FlutterI18n.translate(context, 'create-product.group'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

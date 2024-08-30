@@ -3,24 +3,24 @@ import 'package:flutter_i18n/flutter_i18n.dart';
 
 import '../edit_custumer.dart';
 
-class EmailInput extends StatelessWidget {
+class EditRgInput extends StatelessWidget {
   final CustumerEditPresenter presenter;
-  final String email;
-  const EmailInput(this.presenter, this.email, {super.key});
+  final String rg;
+  const EditRgInput(this.presenter, this.rg, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
       child: StreamBuilder<String?>(
-        stream: presenter.emailErrorStream,
+        stream: presenter.rgErrorStream,
         builder: (context, snapshot) {
           return TextFormField(
             cursorColor: Colors.teal,
             style: const TextStyle(fontSize: 15, color: Colors.teal),
-            keyboardType: TextInputType.emailAddress,
-            onChanged: presenter.valideteEmail,
-            initialValue: email,
+            keyboardType: TextInputType.number,
+            onChanged: presenter.valideteRG,
+            initialValue: rg,
             decoration: InputDecoration(
               fillColor: Colors.teal,
               enabledBorder: const OutlineInputBorder(
@@ -40,7 +40,7 @@ class EmailInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-custumer.email'),
+              labelText: FlutterI18n.translate(context, 'create-custumer.rg'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

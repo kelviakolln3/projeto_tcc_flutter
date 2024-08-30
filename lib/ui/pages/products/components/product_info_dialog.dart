@@ -3,7 +3,7 @@ import '../products.dart';
 import 'components.dart';
 
 class ProductInfoDialog extends StatelessWidget {
-  final ProductsViewModel product;
+  final ProductViewModel product;
   const ProductInfoDialog(this.product, {super.key});
 
   @override
