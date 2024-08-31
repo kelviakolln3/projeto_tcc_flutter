@@ -4,8 +4,6 @@ import '../entities/entities.dart';
 
 abstract class EditSupplier {
   Future<SupplierEntity?> edit(EditSupplierParams params);
-
-  create(EditSupplierParams editSupplierParams) {}
 }
 
 class EditSupplierParams extends Equatable {

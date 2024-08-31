@@ -50,7 +50,7 @@ class GetxSupplierEditPresenter extends GetxController with LoadingManager imple
       _editError.value = null;
       if(_code != null || _activity != null || _enterprise != null || _contact != null || _address != null || _email != null) {
         isLoading = true;
-        final supplier = await editSupplier.create(EditSupplierParams(
+        final supplier = await editSupplier.edit(EditSupplierParams(
           idFornecedor: _idFornecedor!,
           codigo: int.parse(_code!),
           atividade: _activity!,
