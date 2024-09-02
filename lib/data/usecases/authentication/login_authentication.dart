@@ -1,3 +1,5 @@
+import 'package:projeto_tcc_flutter/session.dart';
+
 import '../../../domain/domain.dart';
 import '../../http/http.dart';
 import '../../models/models.dart';
@@ -15,7 +17,9 @@ class LoginAuthentication implements Authentication {
     final body = LoginAuthenticationParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
-      return UserLoginModel.fromJson(httpResponse).toEntity();
+      final user = UserLoginModel.fromJson(httpResponse).toEntity();
+      Session.idUsuario = user.idUsuario;
+      return user;
     } on HttpError catch(error) {
       throw error == HttpError.notFound
         ? DomainError.userNotFound
