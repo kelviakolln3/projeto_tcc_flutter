@@ -1,5 +1,7 @@
 {
     "reload": "Recarregar",
+    "close": "fechar",
+    "save": "salvar",
     "login": {
         "title": "Login",
         "email": "E-mail",
@@ -100,5 +102,48 @@
         "contact": "contato",
         "address": "endereço",
         "email": "e-mail"
+    },
+    "orders": {
+        "title": "Pedidos",
+        "custumer": "cliente: ",
+        "dateCreation": "data criacao: ",
+        "conditionPayment": "condicao pagamento: ",
+        "formPayment": "forma pagamento: ",
+        "total": "total: ",
+        "itens-orders": {
+            "tite": "itens do pedido:",
+            "product": "produto: ",
+            "amount": "quantidade: ",
+            "unitValue": "valor unitario: "
+        },
+        "no_orders": "não hã pedidos"
+    },
+    "create-order": {
+        "title": "Cadastro do Pedido",
+        "custumer": "cliente",
+        "conditionPayment": "condicao pagamento",
+        "formPayment": "forma pagamento",
+        "total": "total",
+        "create-itens-orders": {
+            "itens": "itens do pedido",
+            "product": "produto",
+            "amount": "quantidade",
+            "unitValue": "valor unitario",
+            "no_itens_orders": "não hã itens no pedido"
+        }
+    },
+    "edit-order": {
+        "title": "Edição do Pedido",
+        "custumer": "cliente",
+        "conditionPayment": "condicao pagamento",
+        "formPayment": "forma pagamento",
+        "total": "total",
+        "edit-itens-orders": {
+            "itens": "itens do pedido",
+            "product": "produto",
+            "amount": "quantidade",
+            "unitValue": "valor unitario",
+            "no_itens_orders": "não hã itens no pedido"
+        }
     }
 }

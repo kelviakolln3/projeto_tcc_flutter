@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n.dart';
 import '../suppliers.dart';
 import 'components.dart';
 
@@ -26,7 +27,7 @@ class SupplierInfoDialog extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('fechar', style: TextStyle(fontSize: 15, color: Colors.teal)),
+          child: Text(FlutterI18n.translate(context, 'close'), style: const TextStyle(fontSize: 15, color: Colors.teal)),
         ),
       ],
     );

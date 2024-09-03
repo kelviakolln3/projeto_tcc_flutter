@@ -6,16 +6,21 @@ import '../../mixins/mixins.dart';
 class GetxOrderEditPresenter extends GetxController with LoadingManager implements OrderEditPresenter {
   final FindOrder findOrder;
   final EditOrder editOrder;
+  final DeleteItemOrder deleteItemOrder;
   final String idPedido;
 
-  GetxOrderEditPresenter({required this.findOrder, required this.editOrder, required this.idPedido});
+  GetxOrderEditPresenter({required this.findOrder, required this.editOrder, required this.deleteItemOrder, required this.idPedido});
 
   final _order = Rx<OrderViewModel?>(null);
   final _editError = Rx<String?>(null);
-  final _custumerError = Rx<String?>(null);
-  final _conditionPaymentError = Rx<String?>(null);
-  final _formPaymentError = Rx<String?>(null);
   final _itemOrderError = Rx<List<dynamic>>([]);
+  final _productError = Rx<String?>(null);
+  final _amountError = Rx<String?>(null);
+  final _unitValueError = Rx<String?>(null);
+
+  final _formPaymentOptions = Rx<List<String>>(['Dinheiro', 'Cartão', 'Boleto', 'Pix']);
+  final _conditionPaymentOptions = Rx<List<String>>(['A Vista', 'Débito', 'Crédito', '30 dias']);
+  final _itemOrder = Rx<List<ItemPedidoViewModel>>([]);
 
   String? _idPedido;
   String? _custumer;
@@ -23,27 +28,36 @@ class GetxOrderEditPresenter extends GetxController with LoadingManager implemen
   String? _dateCreation;
   String? _conditionPayment;
   String? _formPayment;
-  String? _total;
-  List<ItemPedidoEntity> _itemPedidoBeans = [];
+  double _total = 0;
+
+  String? _product;
+  String? _amount;
+  String? _unitValue;
 
   @override
   Stream<OrderViewModel?> get orderStream => _order.stream;
   @override
   Stream<String?> get editErrorStream => _editError.stream;
   @override
-  Stream<String?> get custumerErrorStream => _custumerError.stream;
-  @override
-  Stream<String?> get conditionPaymentErrorStream => _conditionPaymentError.stream;
-  @override
-  Stream<String?> get formPaymentErrorStream => _formPaymentError.stream;
-  @override
   Stream<List<dynamic>> get itemOrderErrorStream => _itemOrderError.stream;
+  @override
+  Stream<List<String>> get formPaymentOptionsStream => _formPaymentOptions.stream;
+  @override
+  Stream<List<String>> get conditionPaymentStream => _conditionPaymentOptions.stream;
+  @override
+  Stream<String?> get productErrorStream => _productError.stream;
+  @override
+  Stream<String?> get amountErrorStream => _amountError.stream;
+  @override
+  Stream<String?> get unitValueErrorStream => _unitValueError.stream;
+  @override
+  Stream<List<ItemPedidoViewModel>> get itemOrderStream => _itemOrder.stream;
 
   @override
   Future<void> edit() async {
     try {
       _editError.value = null;
-      if (_custumer != null || _user != null || _dateCreation != null || _conditionPayment != null || _formPayment != null || _total != null || _itemPedidoBeans.isNotEmpty) {
+      if (_custumer != null || _user != null || _dateCreation != null || _conditionPayment != null || _formPayment != null || _total != 0 || _itemOrder.value.isNotEmpty) {
         isLoading = true;
         var dateCreationSplit = _dateCreation!.split('/'); 
         final order = await editOrder.edit(EditOrderParams(
@@ -53,8 +67,8 @@ class GetxOrderEditPresenter extends GetxController with LoadingManager implemen
           dataCriacao: "${dateCreationSplit[2]}-${dateCreationSplit[1]}-${dateCreationSplit[0]}",
           condicaoPagamento: _conditionPayment!,
           formaPagamento: _formPayment!,
-          total: double.parse(_total!),
-          itemPedidoBeans: _itemPedidoBeans.map((item) => EditItemOrderParams(
+          total: _total,
+          itemPedidoBeans: _itemOrder.value.map((item) => EditItemOrderParams(
             idItemPedido: item.idItemPedido!,
             idProduto: item.idProduto,
             quantidade: item.quantidade,
@@ -101,29 +115,76 @@ class GetxOrderEditPresenter extends GetxController with LoadingManager implemen
       _dateCreation = order.dataCriacao;
       _conditionPayment = order.condicaoPagamento;
       _formPayment = order.formaPagamento;
-      _total = order.total.toString();
-      _itemPedidoBeans = order.itemPedidoBeans;
+      _total = order.total;
+      _itemOrder.value = order.itemPedidoBeans.map((item) => ItemPedidoViewModel(
+        idItemPedido: item.idItemPedido,
+        idProduto: item.idProduto,
+        quantidade: item.quantidade,
+        valorUnitario: item.valorUnitario,
+      )).toList();
     }
   }
 
   @override
-  void validateCustumer(String? custumer) {
-    _custumerError.value = null;
-    _custumer = custumer;
-    if(_custumer! == '0') _custumerError.value = "Informe um cliente valido";
+  void addItemOrder(){
+    if(_product != null || _amount != null || _unitValue != null) {
+      _itemOrder.value.add(ItemPedidoViewModel(
+        idProduto: int.parse(_product!),
+        quantidade: double.parse(_amount!),
+        valorUnitario: double.parse(_unitValue!.replaceAll(',', '.'))
+      ));
+    } else {
+      _editError.value = 'Preencha todos os campos do item do pedido';
+    }
+    _product == null; 
+    _amount == null; 
+    _unitValue == null;
+  }
+
+  @override
+  void calculateTotal(){
+    _total = 0;
+    for (var item in _itemOrder.value) {
+      _total += item.valorUnitario;
+    }
+  }
+
+  @override
+  void removeItemOrder(ItemPedidoViewModel item) {
+    _itemOrder.value.remove(item);
+    if(item.idItemPedido != null) {
+      deleteItemOrder.delete(item.idItemPedido!);
+    }
   }
 
   @override
   void validateConditionPayment(String? conditionPayment) {
-    _conditionPaymentError.value = null;
     _conditionPayment = conditionPayment;
-    if(_conditionPayment == null) _conditionPaymentError.value = "Informe uma condição de pagamento";
   }
   
   @override
   void validateFormPayment(String? formPayment) {
-    _formPaymentError.value = null;
     _formPayment = formPayment;
-    if(_formPayment == null) _formPaymentError.value = "Informe uma forma de pagamento";
+  }
+  
+  @override
+  void validateProduct(String? product) {
+    _productError.value = null;
+    _product = product;
+    if(_product! == '0') _productError.value = "Informe um produto valido";
+  }
+
+  @override
+  void validateAmount(String? amount) {
+    _amountError.value = null;
+    _amount = amount;
+    if(_amount! == '0') _amountError.value = "Informe uma quantidade valida";
+  }
+
+  @override
+  void validateUnitValue(String? unitValue) {
+    _unitValueError.value = null;
+    _unitValue = unitValue;
+    if(_unitValue! == '0') _unitValueError.value = "Informe um valor unitário valido";
   }
 }

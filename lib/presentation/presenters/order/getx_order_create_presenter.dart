@@ -11,8 +11,6 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
 
   final _createError = Rx<String?>(null);
   final _custumerError = Rx<String?>(null);
-  final _conditionPaymentError = Rx<String?>(null);
-  final _formPaymentError = Rx<String?>(null);
   final _itemOrderError = Rx<List<dynamic>>([]);
   final _productError = Rx<String?>(null);
   final _amountError = Rx<String?>(null);
@@ -20,12 +18,12 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
 
   final _formPaymentOptions = Rx<List<String>>(['Dinheiro', 'Cartão', 'Boleto', 'Pix']);
   final _conditionPaymentOptions = Rx<List<String>>(['A Vista', 'Débito', 'Crédito', '30 dias']);
+  final _itensOrder = Rx<List<CreateItemOrderParams>>([]);
 
   String? _custumer;
   String? _conditionPayment;
   String? _formPayment;
   double _total = 0;
-  List<CreateItemOrderParams> itensPedido = [];
   String? _product;
   String? _amount;
   String? _unitValue;
@@ -34,12 +32,6 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   Stream<String?> get createErrorStream => _createError.stream;
   @override
   Stream<String?> get custumerErrorStream => _custumerError.stream;
-  @override
-  Stream<String?> get conditionPaymentErrorStream => _conditionPaymentError.stream;
-  @override
-  Stream<String?> get formPaymentErrorStream => _formPaymentError.stream;
-  @override
-  Stream<List<dynamic>> get itemOrderErrorStream => _itemOrderError.stream;
   @override
   Stream<String?> get productErrorStream => _productError.stream;
   @override
@@ -50,6 +42,10 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   Stream<List<String>> get formPaymentOptionsStream => _formPaymentOptions.stream;
   @override
   Stream<List<String>> get conditionPaymentStream => _conditionPaymentOptions.stream;
+  @override
+  Stream<List<CreateItemOrderParams>> get itensOrderStream => _itensOrder.stream;
+  @override
+  Stream<List<dynamic>> get itemOrderErrorStream => _itemOrderError.stream;
 
   @override
   Future<void> create() async {
@@ -65,7 +61,7 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
           condicaoPagamento: _conditionPayment!,
           formaPagamento: _formPayment!,
           total: _total,
-          itemPedidoBeans: itensPedido
+          itemPedidoBeans: _itensOrder.value
         ));
         if(order!.idPedido != null){
           Get.toNamed('/orders');
@@ -83,7 +79,7 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   @override
   void addItemOrder(){
     if(_product != null || _amount != null || _unitValue != null) {
-      itensPedido.add(CreateItemOrderParams(
+      _itensOrder.value.add(CreateItemOrderParams(
         idProduto: int.parse(_product!),
         quantidade: double.parse(_amount!),
         valorUnitario: double.parse(_unitValue!.replaceAll(',', '.'))
@@ -99,9 +95,14 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   @override
   void calculateTotal(){
     _total = 0;
-    for (var item in itensPedido) {
+    for (var item in _itensOrder.value) {
       _total += item.valorUnitario;
     }
+  }
+
+  @override
+  void removeItemOrder(CreateItemOrderParams item) {
+    _itensOrder.value.remove(item);
   }
   
   @override
@@ -113,16 +114,12 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
 
   @override
   void validateConditionPayment(String? conditionPayment) {
-    _conditionPaymentError.value = null;
     _conditionPayment = conditionPayment;
-    if(_conditionPayment == null) _conditionPaymentError.value = "Informe uma condição de pagamento";
   }
   
   @override
   void validateFormPayment(String? formPayment) {
-    _formPaymentError.value = null;
     _formPayment = formPayment;
-    if(_formPayment == null) _formPaymentError.value = "Informe uma forma de pagamento";
   }
 
   @override

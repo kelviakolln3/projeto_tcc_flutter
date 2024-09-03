@@ -32,7 +32,7 @@ class EditOrderParams extends Equatable {
 }
 
 class EditItemOrderParams extends Equatable {
-  final int idItemPedido;
+  final int? idItemPedido;
   final int idProduto;
   final double quantidade;
   final double valorUnitario;
@@ -41,7 +41,7 @@ class EditItemOrderParams extends Equatable {
   List get props => [idItemPedido, idProduto, quantidade, valorUnitario];
 
   const EditItemOrderParams({
-    required this.idItemPedido,
+    this.idItemPedido,
     required this.idProduto,
     required this.quantidade,
     required this.valorUnitario,

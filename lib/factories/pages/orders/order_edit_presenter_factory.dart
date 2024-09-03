@@ -5,5 +5,6 @@ import '../../factories.dart';
 OrderEditPresenter makeGetxOrderEditPresenter(String idPedido) => GetxOrderEditPresenter(
   findOrder: makeFindOrder(),
   editOrder: makeEditOrder(),
+  deleteItemOrder: makeDeleteItemOrder(),
   idPedido: idPedido
 );
