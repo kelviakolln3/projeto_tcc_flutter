@@ -99,7 +99,7 @@ class GetxProductEditPresenter extends GetxController with LoadingManager implem
         _saleValue = product.valorVenda.toString();
       }
     }on DomainError {
-      _editError.value = 'Não foi possível buscar os dados do cliente \n tente novamente';
+      _editError.value = 'Não foi possível buscar os dados do produto \n tente novamente';
     }finally {
       isLoading = false;
     }

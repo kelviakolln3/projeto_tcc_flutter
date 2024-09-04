@@ -4,5 +4,5 @@ import '../../factories.dart';
 
 EditSupplier makeEditSupplier() => RemoteEditSupplier(
   httpClient: makeHttpAdapter(),
-  url: makeApiUrl('produto')
+  url: makeApiUrl('fornecedor')
 );

@@ -13,7 +13,7 @@ class SupplierList extends StatelessWidget {
   Widget build(BuildContext context) {
     if (viewModels.isEmpty) {
       return Center(
-        child: Text(FlutterI18n.translate(context, 'custumers.no_suppliers'),
+        child: Text(FlutterI18n.translate(context, 'suppliers.no_suppliers'),
             style: const TextStyle(fontSize: 25)),
       );
     } else {

@@ -73,27 +73,33 @@ class GetxSupplierEditPresenter extends GetxController with LoadingManager imple
 
   @override
   Future<void> find() async {
-    _editError.value = null;
-    _supplier.value = null;
-    isLoading = true;
-    final supplier = await findSupplier.find(int.parse(idFornecedor));
-    if(supplier != null) {
-      _supplier.value = SupplierViewModel(
-        idFornecedor: supplier.idFornecedor,
-        codigo: supplier.codigo,
-        atividade: supplier.atividade,
-        empresa: supplier.empresa,
-        contato: supplier.contato,
-        endereco: supplier.endereco,
-        email: supplier.email
-      );
-      _idFornecedor = supplier.idFornecedor;
-      _code = supplier.codigo.toString();
-      _activity = supplier.atividade;
-      _enterprise = supplier.empresa;
-      _contact = supplier.contato;
-      _address = supplier.endereco;
-      _email = supplier.email;
+    try {
+      _editError.value = null;
+      _supplier.value = null;
+      isLoading = true;
+      final supplier = await findSupplier.find(int.parse(idFornecedor));
+      if(supplier != null) {
+        _supplier.value = SupplierViewModel(
+          idFornecedor: supplier.idFornecedor,
+          codigo: supplier.codigo,
+          atividade: supplier.atividade,
+          empresa: supplier.empresa,
+          contato: supplier.contato,
+          endereco: supplier.endereco,
+          email: supplier.email
+        );
+        _idFornecedor = supplier.idFornecedor;
+        _code = supplier.codigo.toString();
+        _activity = supplier.atividade;
+        _enterprise = supplier.empresa;
+        _contact = supplier.contato;
+        _address = supplier.endereco;
+        _email = supplier.email;
+      }
+    } on DomainError {
+      _editError.value = 'Não foi possível buscar os dados do fornecedor \n tente novamente';
+    }finally {
+      isLoading = false;
     }
   }
   
