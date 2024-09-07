@@ -21,18 +21,22 @@ class OrderInfoDialog extends StatelessWidget {
             OrderInfo(translate: 'conditionPayment', info: order.condicaoPagamento),
             OrderInfo(translate: 'formPayment', info: order.formaPagamento),
             OrderInfo(translate: 'total', info: order.total.toString().replaceAll('.', ',')),
-            Text(FlutterI18n.translate(context, 'orders.itens-orders.title'), style: const TextStyle(color: Colors.teal)),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(FlutterI18n.translate(context, 'orders.itens-orders.title'), style: const TextStyle(color: Colors.teal)),
+            ),
             Column(
               children: order.itemPedidoBeans.map((item) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  height: 145,
-                  padding: const EdgeInsets.only(top: 5),
+                  height: 100,
+                  padding: const EdgeInsets.all(8.0),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.teal.withOpacity(0.4)),
                     borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                   ),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       OrderInfo(translate: 'itens-orders.product', info: item.idProduto.toString()),
                       OrderInfo(translate: 'itens-orders.amount', info: item.quantidade.toString()),

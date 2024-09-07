@@ -25,7 +25,7 @@ class OrderList extends StatelessWidget {
             padding: const EdgeInsets.all(10.0),
             child: Container(
               width: MediaQuery.of(context).size.width,
-              height: 145,
+              height: 95,
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.teal.withOpacity(0.4)),
                 borderRadius: const BorderRadius.all(Radius.circular(20.0)),
@@ -59,7 +59,7 @@ class OrderList extends StatelessWidget {
                           icon: const Icon(Icons.edit_outlined, color: Colors.orange),
                         ),
                         IconButton(
-                          onPressed: () => presenter.delete(viewModels[index].idPedido!),
+                          onPressed: () => presenter.delete(viewModels[index]),
                           icon: const Icon(Icons.delete_outline_rounded, color: Colors.red),
                         )
                       ],

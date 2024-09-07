@@ -4,5 +4,5 @@ import '../../factories.dart';
 
 DeleteItemOrder makeDeleteItemOrder() => RemoteDeleteItemOrder(
   httpClient: makeHttpAdapter(),
-  url: makeApiUrl('inserir-pedido')
+  url: makeApiUrl('item-pedido')
 );

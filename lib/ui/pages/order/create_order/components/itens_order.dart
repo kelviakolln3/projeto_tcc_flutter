@@ -15,21 +15,22 @@ class ItensOrder extends StatelessWidget {
       child: StreamBuilder<List<CreateItemOrderParams>>(
         stream: presenter.itensOrderStream,
         builder: (context, snapshot) {
-          if(snapshot.data != null && snapshot.data!.isEmpty) {
-            return Text(FlutterI18n.translate(context, 'orders.no_itens_orders'),
-            style: const TextStyle(fontSize: 25));
+          if(snapshot.data == null || snapshot.data!.isEmpty ) {
+            return Text(FlutterI18n.translate(context, 'create-order.create-itens-orders.no_itens_orders'),
+            style: const TextStyle(fontSize: 20));
           }
           return Column(
             children: snapshot.data!.map((item) {
               return Container(
                 width: MediaQuery.of(context).size.width,
                 height: 145,
-                padding: const EdgeInsets.only(top: 5),
+                padding: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   border: Border.all(color: Colors.teal.withOpacity(0.4)),
                   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                 ),
                 child:  Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     ItensOrderInfo(translate: 'itens-orders.product', info: item.idProduto.toString()),
                     ItensOrderInfo(translate: 'itens-orders.amount', info: item.quantidade.toString()),

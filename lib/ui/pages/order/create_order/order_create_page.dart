@@ -29,7 +29,11 @@ class OrderCreatePage extends StatelessWidget {
               CustumerOrderInput(presenter),
               ConditionPaymentOrderInput(presenter),
               FormPaymentOrderInput(presenter),
-              Text(FlutterI18n.translate(context, 'create-itens-orders.itens'), style: const TextStyle(color: Colors.teal)),
+              Total(presenter),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(FlutterI18n.translate(context, 'create-order.create-itens-orders.itens'), style: const TextStyle(color: Colors.teal)),
+              ),
               ItensOrder(presenter),
               IconButton(
                 onPressed: () {

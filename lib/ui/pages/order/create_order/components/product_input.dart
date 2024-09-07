@@ -38,7 +38,7 @@ class ProductInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-itens-orders.product'),
+              labelText: FlutterI18n.translate(context, 'create-order.create-itens-orders.product'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import '../../../domain/domain.dart';
 import '../../../session.dart';
 import '../../../ui/pages/pages.dart';
@@ -15,15 +16,12 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   final _productError = Rx<String?>(null);
   final _amountError = Rx<String?>(null);
   final _unitValueError = Rx<String?>(null);
-
-  final _formPaymentOptions = Rx<List<String>>(['Dinheiro', 'Cartão', 'Boleto', 'Pix']);
-  final _conditionPaymentOptions = Rx<List<String>>(['A Vista', 'Débito', 'Crédito', '30 dias']);
   final _itensOrder = Rx<List<CreateItemOrderParams>>([]);
+  final _total = Rx<double>(0);
 
   String? _custumer;
   String? _conditionPayment;
   String? _formPayment;
-  double _total = 0;
   String? _product;
   String? _amount;
   String? _unitValue;
@@ -39,13 +37,11 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   @override
   Stream<String?> get unitValueErrorStream => _unitValueError.stream;
   @override
-  Stream<List<String>> get formPaymentOptionsStream => _formPaymentOptions.stream;
-  @override
-  Stream<List<String>> get conditionPaymentStream => _conditionPaymentOptions.stream;
-  @override
   Stream<List<CreateItemOrderParams>> get itensOrderStream => _itensOrder.stream;
   @override
   Stream<List<dynamic>> get itemOrderErrorStream => _itemOrderError.stream;
+  @override
+  Stream<double> get totalStream => _total.stream;
 
   @override
   Future<void> create() async {
@@ -56,11 +52,11 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
         calculateTotal();
         final order = await createOrder.create(CreateOrderParams(
           idCliente: int.parse(_custumer!),
-          idUsuario: Session.idUsuario,
-          dataCriacao: DateTime.now().toString(),
+          idUsuario: 1,//Session.idUsuario,
+          dataCriacao: DateFormat('yyyy-MM-dd').format(DateTime.now()),
           condicaoPagamento: _conditionPayment!,
           formaPagamento: _formPayment!,
-          total: _total,
+          total: _total.value,
           itemPedidoBeans: _itensOrder.value
         ));
         if(order!.idPedido != null){
@@ -79,30 +75,32 @@ class GetxOrderCreatePresenter extends GetxController with LoadingManager implem
   @override
   void addItemOrder(){
     if(_product != null || _amount != null || _unitValue != null) {
-      _itensOrder.value.add(CreateItemOrderParams(
+      final item = CreateItemOrderParams(
         idProduto: int.parse(_product!),
         quantidade: double.parse(_amount!),
         valorUnitario: double.parse(_unitValue!.replaceAll(',', '.'))
-      ));
+      );
+      final updatedList = [..._itensOrder.value, item];
+      _itensOrder.value = updatedList;
     } else {
       _createError.value = 'Preencha todos os campos do item do pedido';
     }
-    _product == null; 
-    _amount == null; 
-    _unitValue == null;
+    calculateTotal();
   }
 
   @override
   void calculateTotal(){
-    _total = 0;
+    _total.value = 0;
     for (var item in _itensOrder.value) {
-      _total += item.valorUnitario;
+      _total.value += item.quantidade * item.valorUnitario;
     }
   }
 
   @override
   void removeItemOrder(CreateItemOrderParams item) {
-    _itensOrder.value.remove(item);
+    final updatedList = _itensOrder.value.where((i) => i != item).toList();
+    _itensOrder.value = updatedList;
+    calculateTotal();
   }
   
   @override

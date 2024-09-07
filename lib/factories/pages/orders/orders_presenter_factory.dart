@@ -4,5 +4,6 @@ import '../../factories.dart';
 
 OrdersPresenter makeGetxOrdersPresenter() => GetxOrdersPresenter(
   loadOrders: makeLoadOrders(),
-  deleteOrder: makeDeleteOrder()
+  deleteOrder: makeDeleteOrder(),
+  deleteItemOrder: makeDeleteItemOrder()
 );

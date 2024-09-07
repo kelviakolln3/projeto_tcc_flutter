@@ -6,13 +6,14 @@ import '../../mixins/mixins.dart';
 class GetxOrdersPresenter extends GetxController with LoadingManager, NavigationManager implements OrdersPresenter{
   final LoadOrders loadOrders;
   final DeleteOrder deleteOrder;
+  final DeleteItemOrder deleteItemOrder;
 
   final _orders = Rx<List<OrderViewModel>>([]);
 
   @override
   Stream<List<OrderViewModel>> get ordersStream => _orders.stream;
 
-  GetxOrdersPresenter({required this.loadOrders, required this.deleteOrder});
+  GetxOrdersPresenter({required this.loadOrders, required this.deleteOrder, required this.deleteItemOrder});
 
   @override
   Future<void> loadData() async {
@@ -43,13 +44,16 @@ class GetxOrdersPresenter extends GetxController with LoadingManager, Navigation
   }
 
   @override
-  Future<void> delete(int id) async {
+  Future<void> delete(OrderViewModel order) async {
     try {
       isLoading = true;
       List<OrderViewModel> list = _orders.value.toList();
-      final delete = await deleteOrder.delete(id);
+      for (var item in order.itemPedidoBeans) {
+        await deleteItemOrder.delete(item.idItemPedido!);
+      }
+      final delete = await deleteOrder.delete(order.idPedido!);
       if(delete) {
-        list.removeWhere((c) => c.idPedido == id);
+        list.removeWhere((c) => c.idPedido == order.idPedido!);
         _orders.value = list;
       }
     } on DomainError {

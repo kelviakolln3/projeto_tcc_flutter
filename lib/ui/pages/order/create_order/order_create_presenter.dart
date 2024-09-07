@@ -10,9 +10,8 @@ abstract class OrderCreatePresenter implements Listenable {
   Stream<String?> get productErrorStream;
   Stream<String?> get amountErrorStream;
   Stream<String?> get unitValueErrorStream;
-  Stream<List<String>> get formPaymentOptionsStream;
-  Stream<List<String>> get conditionPaymentStream;
   Stream<List<CreateItemOrderParams>> get itensOrderStream;
+  Stream<double> get totalStream;
   Future<void> create();
   void addItemOrder();
   void removeItemOrder(CreateItemOrderParams item);

@@ -6,5 +6,5 @@ abstract class OrdersPresenter implements Listenable {
   Stream<bool> get isLoadingStream;
   Stream<List<OrderViewModel>> get ordersStream;
   Future<void> loadData();
-  Future<void> delete(int idPedido);
+  Future<void> delete(OrderViewModel order);
 }
