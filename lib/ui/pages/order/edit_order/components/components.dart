@@ -7,3 +7,4 @@ export './edit_product_input.dart';
 export './edit_add_itens_order_dialog.dart';
 export './edit_amount_input.dart';
 export './edit_unit_value_input.dart';
+export './edit_total.dart';

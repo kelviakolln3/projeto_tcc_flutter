@@ -55,7 +55,7 @@ class OrderList extends StatelessWidget {
                           icon: const Icon(Icons.remove_red_eye_sharp, color: Colors.blue),
                         ),
                         IconButton(
-                          onPressed: () => Get.toNamed('/supplier/edit/${viewModels[index].idPedido!}'),
+                          onPressed: () => Get.toNamed('/order/edit/${viewModels[index].idPedido!}'),
                           icon: const Icon(Icons.edit_outlined, color: Colors.orange),
                         ),
                         IconButton(

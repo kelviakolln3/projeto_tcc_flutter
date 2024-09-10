@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../ui.dart';
 
@@ -6,15 +7,13 @@ abstract class OrderEditPresenter implements Listenable {
   Future<void> find();
   Future<void> edit();
   Stream<String?> get editErrorStream;
+  Rx<List<ItemPedidoViewModel>> get itensOrder;
   Stream<OrderViewModel?> get orderStream;
-  Stream<List<dynamic>> get itemOrderErrorStream;
   Stream<bool> get isLoadingStream;
-  Stream<List<String>> get formPaymentOptionsStream;
-  Stream<List<String>> get conditionPaymentStream;
   Stream<String?> get productErrorStream;
   Stream<String?> get amountErrorStream;
   Stream<String?> get unitValueErrorStream;
-  Stream<List<ItemPedidoViewModel>> get itemOrderStream;
+  Stream<double> get totalStream;
   void addItemOrder();
   void validateConditionPayment(String? conditionPayment);
   void validateFormPayment(String? formPayment);

@@ -21,12 +21,15 @@ class EditAddItensOrderDialog extends StatelessWidget {
       ),
       actions: [
         TextButton(
-          onPressed: () => presenter.addItemOrder,
-          child: Text(FlutterI18n.translate(context, 'save'), style: const TextStyle(fontSize: 15, color: Colors.teal)),
-        ),
-        TextButton(
           onPressed: () => Navigator.of(context).pop(),
           child: Text(FlutterI18n.translate(context, 'close'), style: const TextStyle(fontSize: 15, color: Colors.teal)),
+        ),
+        TextButton(
+          onPressed: () => {
+            presenter.addItemOrder(),
+            Navigator.of(context).pop(),
+          },
+          child: Text(FlutterI18n.translate(context, 'save'), style: const TextStyle(fontSize: 15, color: Colors.teal)),
         ),
       ],
     );

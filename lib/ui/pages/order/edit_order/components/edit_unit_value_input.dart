@@ -37,7 +37,7 @@ class EditUnitValueInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'create-itens-orders.unitValue'),
+              labelText: FlutterI18n.translate(context, 'edit-order.edit-itens-orders.unitValue'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

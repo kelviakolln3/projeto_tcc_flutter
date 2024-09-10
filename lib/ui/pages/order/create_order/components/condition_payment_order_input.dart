@@ -12,7 +12,7 @@ class ConditionPaymentOrderInput extends StatefulWidget {
 }
 
 class _ConditionPaymentOrderInputState extends State<ConditionPaymentOrderInput> {
-  final List<String> conditionPaymentOptions = ['A Vista', 'Débito', 'Crédito', '30 dias'];
+  final List<String> conditionPaymentOptions = ['A Vista', 'Debito', 'Credito', '30 dias'];
   late String dropdownvalue;
 
   @override

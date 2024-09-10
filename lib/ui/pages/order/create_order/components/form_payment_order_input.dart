@@ -12,7 +12,7 @@ class FormPaymentOrderInput extends StatefulWidget {
 }
 
 class _FormPaymentOrderInputState extends State<FormPaymentOrderInput> {
-  final List<String> formPaymentOptions = ['Dinheiro', 'Cartão', 'Boleto', 'Pix'];
+  final List<String> formPaymentOptions = ['Dinheiro', 'Cartao', 'Boleto', 'Pix'];
   late String dropdownvalue; 
 
   @override

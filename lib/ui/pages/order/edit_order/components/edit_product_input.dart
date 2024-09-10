@@ -38,7 +38,7 @@ class EditProductInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'edit-itens-orders.product'),
+              labelText: FlutterI18n.translate(context, 'edit-order.edit-itens-orders.product'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );

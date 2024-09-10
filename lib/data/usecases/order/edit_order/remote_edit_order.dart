@@ -13,8 +13,9 @@ class RemoteEditOrder implements EditOrder {
   @override
   Future<OrderEntity?> edit(EditOrderParams params) async {
     final body = RemoteEditOrderParams.fromDomain(params).toJson();
+    print(body);
     try {
-      final httpResponse = await httpClient.request(url: '$url/${params.idPedido}', method: 'put', body: body);
+      final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteOrdersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
       DomainError.unexpected;
@@ -88,7 +89,7 @@ class RemoteEditOrderItemParams {
   );
 
   Map toJson() => {
-    'idItemPedido': idItemPedido,
+    if(idItemPedido != null) 'idItemPedido': idItemPedido,
     'idProduto': idProduto,
     'quantidade': quantidade,
     'valorUnitario': valorUnitario,

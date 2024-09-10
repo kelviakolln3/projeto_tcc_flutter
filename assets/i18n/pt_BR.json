@@ -137,7 +137,7 @@
         "custumer": "cliente",
         "conditionPayment": "condicao pagamento",
         "formPayment": "forma pagamento",
-        "total": "total",
+        "total": "total: ",
         "edit-itens-orders": {
             "itens": "itens do pedido",
             "product": "produto",

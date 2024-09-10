@@ -16,7 +16,11 @@ class EditOrderInputs extends StatelessWidget {
       children: [
         EditConditionPaymentOrderInput(presenter, order.condicaoPagamento),
         EditFormPaymentOrderInput(presenter, order.formaPagamento),
-        Text(FlutterI18n.translate(context, 'edit-itens-orders.itens'), style: const TextStyle(color: Colors.teal)),
+        EditTotal(presenter),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(FlutterI18n.translate(context, 'edit-order.edit-itens-orders.itens'), style: const TextStyle(color: Colors.teal)),
+        ),
         EditItensOrder(presenter),
         IconButton(
           onPressed: () {

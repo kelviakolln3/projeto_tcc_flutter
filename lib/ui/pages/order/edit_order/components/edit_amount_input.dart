@@ -37,7 +37,7 @@ class EditAmountInput extends StatelessWidget {
                 borderSide: BorderSide(color: Colors.red, width: 1.2),
               ),
               errorText: snapshot.data,
-              labelText: FlutterI18n.translate(context, 'edit-itens-orders.amount'),
+              labelText: FlutterI18n.translate(context, 'edit-order.edit-itens-orders.amount'),
               labelStyle: TextStyle(fontSize: 15, color: snapshot.data != null ? Colors.red : Colors.teal),
             ),
           );
