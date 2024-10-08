@@ -32,4 +32,20 @@ class ParamsFactory{
     endereco: faker.address.streetAddress(),
     email: faker.internet.email()
   );
+
+  static CreateOrderParams makeAddOrder() => CreateOrderParams(
+    idCliente: faker.randomGenerator.integer(100),
+    idUsuario: faker.randomGenerator.integer(100),
+    dataCriacao: DateTime.now().toIso8601String(),
+    condicaoPagamento: faker.randomGenerator.string(10),
+    formaPagamento: faker.randomGenerator.string(10),
+    total: faker.randomGenerator.decimal(), 
+    itemPedidoBeans: [
+      CreateItemOrderParams(
+        idProduto: faker.randomGenerator.integer(100), 
+        quantidade: faker.randomGenerator.decimal(),
+        valorUnitario: faker.randomGenerator.decimal(), 
+      ),
+    ],
+  );
 }

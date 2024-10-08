@@ -12,15 +12,14 @@ class RemoteCreateOrder implements CreateOrder {
   });
 
   @override
-  Future<OrderEntity?> create(CreateOrderParams params) async {
+  Future<OrderEntity> create(CreateOrderParams params) async {
     final body = RemoteCreateOrderParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteOrdersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
