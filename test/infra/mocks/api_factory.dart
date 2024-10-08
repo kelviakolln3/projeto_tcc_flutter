@@ -49,6 +49,27 @@ class ApiFactory {
     },
   ];
 
+  static List<Map> makeSuppliersList() => [
+    {
+      'idFornecedor': faker.randomGenerator.integer(20),
+      'codigo': faker.randomGenerator.integer(20),
+      'atividade': faker.address.streetAddress(),
+      'empresa': faker.randomGenerator.string(20),
+      'contato': faker.phoneNumber.toString(),
+      'endereco': faker.randomGenerator.string(10),
+      'email': faker.internet.email()
+    },
+    {
+      'idFornecedor': faker.randomGenerator.integer(20),
+      'codigo': faker.randomGenerator.integer(20),
+      'atividade': faker.address.streetAddress(),
+      'empresa': faker.randomGenerator.string(20),
+      'contato': faker.phoneNumber.toString(),
+      'endereco': faker.randomGenerator.string(10),
+      'email': faker.internet.email()
+    },
+  ];
+
   static Map makeInvalidJson() => {
     'invalid_key': 'invalid_value'
   };
