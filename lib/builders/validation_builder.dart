@@ -23,6 +23,21 @@ class ValidationBuilder {
     return this;
   }
 
+  ValidationBuilder phone() {
+    validations.add(PhoneValidation(fieldName));
+    return this;
+  }
+
+  ValidationBuilder date() {
+    validations.add(DateValidation(fieldName));
+    return this;
+  }
+
+  ValidationBuilder cpf() {
+    validations.add(CpfValidation(fieldName));
+    return this;
+  }
+
   ValidationBuilder min(int size) {
     validations.add(MinLengthValidation(field: fieldName, size: size));
     return this;

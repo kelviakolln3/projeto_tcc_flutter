@@ -4,3 +4,4 @@ export './custumer_create_page_factory.dart';
 export './custumer_create_presenter_factory.dart';
 export './custumer_edit_page_factory.dart';
 export './custumer_edit_presenter_factory.dart';
+export './custumer_validation_factory.dart';
