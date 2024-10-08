@@ -17,8 +17,7 @@ class RemoteLoadOrders implements LoadOrders {
       final httpResponse = await httpClient.request(url: url, method: 'get');
       return httpResponse.map<OrderEntity>((json) => RemoteOrdersModel.fromJson(json).toEntity()).toList();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return [];
   }
 }
