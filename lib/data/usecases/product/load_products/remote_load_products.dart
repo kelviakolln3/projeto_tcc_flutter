@@ -17,8 +17,7 @@ class RemoteLoadProducts implements LoadProducts {
       final httpResponse = await httpClient.request(url: url, method: 'get');
       return httpResponse.map<ProductEntity>((json) => RemoteProductsModel.fromJson(json).toEntity()).toList();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return [];
   }
 }
