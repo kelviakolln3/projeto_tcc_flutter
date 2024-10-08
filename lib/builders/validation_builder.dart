@@ -48,5 +48,15 @@ class ValidationBuilder {
     return this;
   }
 
+  ValidationBuilder list() {
+    validations.add(ListValidation(fieldName));
+    return this;
+  }
+
+  ValidationBuilder nestedValidations(List<FieldValidation> nestedValidations) {
+    validations.add(NestedValidation(fieldName, nestedValidations));
+    return this;
+  }
+
   List<FieldValidation> build() => validations;
 }

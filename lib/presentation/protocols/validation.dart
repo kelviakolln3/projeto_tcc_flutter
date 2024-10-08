@@ -7,5 +7,7 @@ abstract class Validation {
 
 enum ValidationError {
   requiredField,
-  invalidField
+  invalidField,
+  requiredList,
+  invalidList,
 }
