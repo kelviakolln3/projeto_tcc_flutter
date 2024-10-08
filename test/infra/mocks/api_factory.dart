@@ -26,6 +26,18 @@ class ApiFactory {
     },
   ];
 
+  static Map makeAddCustumerJson() => {
+    'idCliente': faker.randomGenerator.integer(20),
+    'codigo': faker.randomGenerator.integer(20),
+    'nome': faker.person.name(),
+    'cpf': faker.randomGenerator.string(14),
+    'rg': faker.randomGenerator.integer(20).toString(),
+    'endereco': faker.address.streetAddress(),
+    'dataNasc': faker.date.dateTime().toIso8601String(),
+    'contato': faker.phoneNumber.toString(),
+    'email': faker.internet.email()
+  };
+
   static List<Map> makeProductsList() => [
     {
       'idProduto': faker.randomGenerator.integer(20),

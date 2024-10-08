@@ -12,15 +12,14 @@ class RemoteCreateCustumer implements CreateCustumer {
   });
 
   @override
-  Future<CustumerEntity?> create(CreateCustumerParams params) async {
+  Future<CustumerEntity> create(CreateCustumerParams params) async {
     final body = RemoteCreateCustumerParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteCustumersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
