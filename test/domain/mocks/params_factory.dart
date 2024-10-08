@@ -13,4 +13,14 @@ class ParamsFactory{
     contato: faker.phoneNumber.toString(),
     email: faker.internet.email()
   );
+
+  static CreateProductParams makeAddProduct() => CreateProductParams(
+    codigo: faker.randomGenerator.integer(20),
+    nome: faker.person.name(),
+    codigoBarras: faker.randomGenerator.integer(20).toString(),
+    estoque: faker.randomGenerator.decimal(),
+    grupo: faker.randomGenerator.string(20),
+    marca: faker.randomGenerator.string(20),
+    valorVenda: faker.randomGenerator.decimal(),
+  );
 }

@@ -12,15 +12,14 @@ class RemoteCreateProduct implements CreateProduct {
   });
 
   @override
-  Future<ProductEntity?> create(CreateProductParams params) async {
+  Future<ProductEntity> create(CreateProductParams params) async {
     final body = RemoteCreateProductParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteProductsModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
