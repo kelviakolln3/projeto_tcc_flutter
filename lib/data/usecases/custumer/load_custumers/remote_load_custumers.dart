@@ -17,8 +17,7 @@ class RemoteLoadCustumers implements LoadCustumers {
       final httpResponse = await httpClient.request(url: url, method: 'get');
       return httpResponse.map<CustumerEntity>((json) => RemoteCustumersModel.fromJson(json).toEntity()).toList();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return [];
   }
 }
