@@ -23,4 +23,13 @@ class ParamsFactory{
     marca: faker.randomGenerator.string(20),
     valorVenda: faker.randomGenerator.decimal(),
   );
+
+  static CreateSupplierParams makeAddSupplier() => CreateSupplierParams(
+    codigo: faker.randomGenerator.integer(20),
+    atividade: faker.randomGenerator.string(20),
+    empresa: faker.randomGenerator.string(20),
+    contato: faker.phoneNumber.toString(),
+    endereco: faker.address.streetAddress(),
+    email: faker.internet.email()
+  );
 }

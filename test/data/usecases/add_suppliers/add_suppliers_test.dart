@@ -9,20 +9,20 @@ import 'package:faker/faker.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-void main() { //Tempo total de montagem 23 min e 22 seg
-  late RemoteCreateCustumer sut;
+void main() { //Tempo total de montagem 06 min e 31 seg
+  late RemoteCreateSupplier sut;
   late HttpClientSpy httpClient;
   late String url; 
-  late CreateCustumerParams params;
+  late CreateSupplierParams params;
   late Map apiResult;
 
   setUp(() {
     url = faker.internet.httpUrl();
-    params = ParamsFactory.makeAddCustumer();
-    apiResult = ApiFactory.makeAddCustumerJson();
+    params = ParamsFactory.makeAddSupplier();
+    apiResult = ApiFactory.makeAddSupplierJson();
     httpClient = HttpClientSpy();
     httpClient.mockRequest(apiResult);
-    sut = RemoteCreateCustumer(httpClient: httpClient, url: url);
+    sut = RemoteCreateSupplier(httpClient: httpClient, url: url);
   });
 
    test('Should call HttpClient with correct values', () async {
@@ -33,12 +33,10 @@ void main() { //Tempo total de montagem 23 min e 22 seg
       method: 'post',
       body: {
         'codigo': params.codigo,
-        'nome': params.nome,
-        'cpf': params.cpf,
-        'rg': params.rg,
-        'endereco': params.endereco,
-        'dataNasc': params.dataNasc,
+        'atividade': params.atividade,
+        'empresa': params.empresa,
         'contato': params.contato,
+        'endereco': params.endereco,
         'email': params.email,
       }
     ));
@@ -68,10 +66,10 @@ void main() { //Tempo total de montagem 23 min e 22 seg
     expect(future, throwsA(DomainError.unexpected));
   });
 
-  test('Should return an Custumer if HttpClient returns 200', () async {
-    final custumer = await sut.create(params);
+  test('Should return an Supplier if HttpClient returns 200', () async {
+    final supplier = await sut.create(params);
 
-    expect(custumer.idCliente, apiResult['idCliente']);
+    expect(supplier.idFornecedor, apiResult['idFornecedor']);
   });
 
   test('Should throw UnexpectedError if HttpClient returns 200 with invalid data', () async {

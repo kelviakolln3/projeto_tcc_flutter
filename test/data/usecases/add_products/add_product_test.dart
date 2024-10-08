@@ -67,10 +67,10 @@ void main() { //Tempo total de montagem 05 min e 45 seg
     expect(future, throwsA(DomainError.unexpected));
   });
 
-  test('Should return an Account if HttpClient returns 200', () async {
-    final account = await sut.create(params);
+  test('Should return an Product if HttpClient returns 200', () async {
+    final product = await sut.create(params);
 
-    expect(account.idProduto, apiResult['idProduto']);
+    expect(product.idProduto, apiResult['idProduto']);
   });
 
   test('Should throw UnexpectedError if HttpClient returns 200 with invalid data', () async {

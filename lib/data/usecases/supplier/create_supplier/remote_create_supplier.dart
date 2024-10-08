@@ -12,15 +12,14 @@ class RemoteCreateSupplier implements CreateSupplier {
   });
 
   @override
-  Future<SupplierEntity?> create(CreateSupplierParams params) async {
+  Future<SupplierEntity> create(CreateSupplierParams params) async {
     final body = RemoteCreateSupplierParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteSuppliersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
