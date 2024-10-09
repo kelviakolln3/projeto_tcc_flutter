@@ -16,8 +16,7 @@ class RemoteDeleteOrder implements DeleteOrder {
       await httpClient.request(url: '$url/$idPedido', method: 'delete');
       return true;
     } on HttpError {
-      DomainError.unexpected;
-      return false;
+      throw DomainError.unexpected;
     }
   }
 }
