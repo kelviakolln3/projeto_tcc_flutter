@@ -16,8 +16,7 @@ class RemoteDeleteSupplier implements DeleteSupplier {
       await httpClient.request(url: '$url/$idFornecedor', method: 'delete');
       return true;
     } on HttpError {
-      DomainError.unexpected;
-      return false;
+      throw DomainError.unexpected;
     }
   }
 }
