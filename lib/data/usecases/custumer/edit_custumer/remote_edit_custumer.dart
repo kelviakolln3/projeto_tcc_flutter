@@ -11,15 +11,14 @@ class RemoteEditCustumer implements EditCustumer {
   });
 
   @override
-  Future<CustumerEntity?> edit(EditCustumerParams params) async {
+  Future<CustumerEntity> edit(EditCustumerParams params) async {
     final body = RemoteEditCustumerParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: '$url/${params.idCliente}', method: 'put', body: body);
       return RemoteCustumersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
