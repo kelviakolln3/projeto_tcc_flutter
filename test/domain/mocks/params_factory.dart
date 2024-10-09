@@ -35,6 +35,17 @@ class ParamsFactory{
     valorVenda: faker.randomGenerator.decimal(),
   );
 
+  static EditProductParams makeEditProduct() => EditProductParams(
+    idProduto: faker.randomGenerator.integer(10),
+    codigo: faker.randomGenerator.integer(20),
+    nome: faker.person.name(),
+    codigoBarras: faker.randomGenerator.integer(20).toString(),
+    estoque: faker.randomGenerator.decimal(),
+    grupo: faker.randomGenerator.string(20),
+    marca: faker.randomGenerator.string(20),
+    valorVenda: faker.randomGenerator.decimal(),
+  );
+
   static CreateSupplierParams makeAddSupplier() => CreateSupplierParams(
     codigo: faker.randomGenerator.integer(20),
     atividade: faker.randomGenerator.string(20),

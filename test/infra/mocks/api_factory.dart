@@ -84,6 +84,17 @@ class ApiFactory {
     'valorVenda': faker.randomGenerator.decimal(),
   };
 
+  static Map makeEditProductJson() => {
+    'idProduto': faker.randomGenerator.integer(20),
+    'codigo': faker.randomGenerator.integer(20),
+    'nome': faker.person.name(),
+    'codigoBarras': faker.randomGenerator.integer(14).toString(),
+    'estoque': faker.randomGenerator.decimal(),
+    'grupo': faker.randomGenerator.string(10),
+    'marca': faker.randomGenerator.string(10),
+    'valorVenda': faker.randomGenerator.decimal(),
+  };
+
   static List<Map> makeSuppliersList() => [
     {
       'idFornecedor': faker.randomGenerator.integer(20),

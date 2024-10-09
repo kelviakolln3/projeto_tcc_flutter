@@ -11,15 +11,14 @@ class RemoteEditProduct implements EditProduct {
   });
 
   @override
-  Future<ProductEntity?> edit(EditProductParams params) async {
+  Future<ProductEntity> edit(EditProductParams params) async {
     final body = RemoteEditProductParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: '$url/${params.idProduto}', method: 'put', body: body);
       return RemoteProductsModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
