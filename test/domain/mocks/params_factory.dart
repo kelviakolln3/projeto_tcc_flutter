@@ -55,6 +55,16 @@ class ParamsFactory{
     email: faker.internet.email()
   );
 
+  static EditSupplierParams makeEditSupplier() => EditSupplierParams(
+    idFornecedor: faker.randomGenerator.integer(10),
+    codigo: faker.randomGenerator.integer(20),
+    atividade: faker.randomGenerator.string(20),
+    empresa: faker.randomGenerator.string(20),
+    contato: faker.phoneNumber.toString(),
+    endereco: faker.address.streetAddress(),
+    email: faker.internet.email()
+  );
+
   static CreateOrderParams makeAddOrder() => CreateOrderParams(
     idCliente: faker.randomGenerator.integer(100),
     idUsuario: faker.randomGenerator.integer(100),

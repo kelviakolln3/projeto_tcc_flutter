@@ -126,6 +126,16 @@ class ApiFactory {
     'email': faker.internet.email()
   };
 
+  static Map makeEditSupplierJson() => {
+    'idFornecedor': faker.randomGenerator.integer(20),
+    'codigo': faker.randomGenerator.integer(20),
+    'atividade': faker.address.streetAddress(),
+    'empresa': faker.randomGenerator.string(20),
+    'contato': faker.phoneNumber.toString(),
+    'endereco': faker.randomGenerator.string(10),
+    'email': faker.internet.email()
+  };
+
   static List<Map> makeOrdersList() => [
     {
       'idPedido': faker.randomGenerator.integer(1000),

@@ -11,15 +11,14 @@ class RemoteEditSupplier implements EditSupplier {
   });
 
   @override
-  Future<SupplierEntity?> edit(EditSupplierParams params) async {
+  Future<SupplierEntity> edit(EditSupplierParams params) async {
     final body = RemoteEditSupplierParams.fromDomain(params).toJson();
     try {
       final httpResponse = await httpClient.request(url: '$url/${params.idFornecedor}', method: 'put', body: body);
       return RemoteSuppliersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 
