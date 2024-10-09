@@ -11,16 +11,14 @@ class RemoteEditOrder implements EditOrder {
   });
 
   @override
-  Future<OrderEntity?> edit(EditOrderParams params) async {
+  Future<OrderEntity> edit(EditOrderParams params) async {
     final body = RemoteEditOrderParams.fromDomain(params).toJson();
-    print(body);
     try {
       final httpResponse = await httpClient.request(url: url, method: 'post', body: body);
       return RemoteOrdersModel.fromJson(httpResponse).toEntity();
     } on HttpError {
-      DomainError.unexpected;
+      throw DomainError.unexpected;
     }
-    return null;
   }
 }
 

@@ -80,4 +80,27 @@ class ParamsFactory{
       ),
     ],
   );
+
+  static EditOrderParams makeEditOrder() => EditOrderParams(
+    idPedido: faker.randomGenerator.integer(10),
+    idCliente: faker.randomGenerator.integer(100),
+    idUsuario: faker.randomGenerator.integer(100),
+    dataCriacao: DateTime.now().toIso8601String(),
+    condicaoPagamento: faker.randomGenerator.string(10),
+    formaPagamento: faker.randomGenerator.string(10),
+    total: faker.randomGenerator.decimal(), 
+    itemPedidoBeans: [
+      EditItemOrderParams(
+        idItemPedido: faker.randomGenerator.integer(10),
+        idProduto: faker.randomGenerator.integer(100), 
+        quantidade: faker.randomGenerator.decimal(),
+        valorUnitario: faker.randomGenerator.decimal(), 
+      ),
+      EditItemOrderParams(
+        idProduto: faker.randomGenerator.integer(100), 
+        quantidade: faker.randomGenerator.decimal(),
+        valorUnitario: faker.randomGenerator.decimal(), 
+      ),
+    ],
+  );
 }
