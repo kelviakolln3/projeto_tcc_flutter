@@ -7,10 +7,10 @@ class ParamsFactory{
     codigo: faker.randomGenerator.integer(20),
     nome: faker.person.name(),
     cpf: faker.randomGenerator.string(14),
-    rg: faker.randomGenerator.integer(20).toString(),
+    rg: faker.randomGenerator.integer(1000000).toString(),
     endereco: faker.address.streetAddress(),
     dataNasc: faker.date.dateTime().toIso8601String(),
-    contato: faker.phoneNumber.toString(),
+    contato: faker.phoneNumber.random.toString(),
     email: faker.internet.email()
   );
   static EditCustumerParams makeEditCustumer() => EditCustumerParams(
@@ -75,6 +75,22 @@ class ParamsFactory{
     itemPedidoBeans: [
       CreateItemOrderParams(
         idProduto: faker.randomGenerator.integer(100), 
+        quantidade: faker.randomGenerator.decimal(),
+        valorUnitario: faker.randomGenerator.decimal(), 
+      ),
+    ],
+  );
+
+  static CreateOrderParams makeAddOrderStressTest() => CreateOrderParams(
+    idCliente: 52,
+    idUsuario: 1,
+    dataCriacao: DateTime.now().toIso8601String(),
+    condicaoPagamento: faker.randomGenerator.string(10),
+    formaPagamento: faker.randomGenerator.string(10),
+    total: faker.randomGenerator.decimal(), 
+    itemPedidoBeans: [
+      CreateItemOrderParams(
+        idProduto: 3, 
         quantidade: faker.randomGenerator.decimal(),
         valorUnitario: faker.randomGenerator.decimal(), 
       ),
