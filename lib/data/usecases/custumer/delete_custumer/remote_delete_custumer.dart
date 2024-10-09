@@ -16,8 +16,7 @@ class RemoteDeleteCustumer implements DeleteCustumer {
       await httpClient.request(url: '$url/$idCliente', method: 'delete');
       return true;
     } on HttpError {
-      DomainError.unexpected;
-      return false;
+      throw DomainError.unexpected;
     }
   }
 }
