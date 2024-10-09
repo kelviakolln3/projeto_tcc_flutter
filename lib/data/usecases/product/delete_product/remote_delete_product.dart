@@ -16,8 +16,7 @@ class RemoteDeleteProduct implements DeleteProduct {
       await httpClient.request(url: '$url/$idProduto', method: 'delete');
       return true;
     } on HttpError {
-      DomainError.unexpected;
-      return false;
+      throw DomainError.unexpected;
     }
   }
 }
